@@ -1,18 +1,15 @@
 public class Prato {
     private String nome;
     private float preco;
-    private char tipo;
-
-    public Prato(String nome, float preco, char tipo) throws ExceptionPrato {
-        setNome(nome);
-        setPreco(preco);
-        setTipo(tipo);
-    }
 
     public Prato(String nome, float preco) throws ExceptionPrato {
         setNome(nome);
         setPreco(preco);
-        setTipo('c');
+    }
+
+    public Prato() throws ExceptionPrato{
+        setNome("Comida");
+        setPreco(0.1F);
     }
 
     public void setNome(String nome) throws ExceptionPrato {
@@ -29,10 +26,11 @@ public class Prato {
             throw new ExceptionPrato("Preço invalido");
     }
 
-    public void setTipo(char tipo) throws ExceptionPrato{
-        if (tipo == 'c' || tipo == 'b')
-            this.tipo = tipo;
-        else
-            throw new ExceptionPrato("Tipo invalido");
+    public String getNome() {
+        return nome;
+    }
+
+    public float getPreco() {
+        return preco;
     }
 }
