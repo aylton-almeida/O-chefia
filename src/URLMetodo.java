@@ -29,10 +29,10 @@ public class URLMetodo implements Container {
 
             // Verifica qual ação está sendo chamada
 
-
+            Restaurante restaurante = new Restaurante();
 
             if (path.startsWith("/cadastrarPrato") && "POST".equals(method)) {
-                mensagem = estoqueService.adicionarProduto(request);
+                restaurante.addPratoCardapio();
                 this.enviaResposta(Status.CREATED, response, mensagem);
 
             } else if (path.startsWith("/consultarProduto") && "GET".equals(method)) {
