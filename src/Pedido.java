@@ -1,5 +1,3 @@
-package classes;
-
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -40,7 +38,7 @@ public class Pedido {
 		this.setEstado("Cancelado");
 	}
 	
-	public boolean estaAbertado() {
+	public boolean estaAberto() {
 		return this.getEstado() == "cancelado"? false : true;
 	}
 	

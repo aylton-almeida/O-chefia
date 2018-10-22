@@ -1,4 +1,3 @@
-package classes;
 
 abstract class Endereco {
 	private int numero;
