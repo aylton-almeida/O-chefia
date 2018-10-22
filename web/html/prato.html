@@ -54,14 +54,14 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="cadastrarPratoForm" action="http://127.0.0.1:880/cadastrarPrato" method="post">
+          <form id="cadastrarPratoForm" action="http://127.0.0.1:880/cadastrarPrato" method="POST">
             <div class="form-group">
               <label for="nomeInput">Nome</label>
-              <input type="text" class="form-control" name="nome" id="nomeInput" placeholder="Digite o nome do prato">
+              <input type="text" class="form-control" name="nome" id="nomeInput" placeholder="Digite o nome do prato" required>
             </div>
             <div class="form-group">
               <label for="precoInput">Preco</label>
-              <input type="number" class="form-control" name="preco" id="precoInput" placeholder="Digite o valor da unidade">
+              <input type="number" class="form-control" name="preco" id="precoInput" placeholder="Digite o valor da unidade" required>
             </div>
             <div class="form-group">
               <label for="ingredientesInput">Tipo</label>
