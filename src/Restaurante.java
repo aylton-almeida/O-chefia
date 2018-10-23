@@ -1,14 +1,13 @@
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class Restaurante {
     private String nome, cnpj;
     private Endereco endereco;
     private int numMesas;
     private List<Prato> cardapio;
-    private Dictionary comentarios, pedidosAbertos, historicoDePedidos;
+    private Dictionary comentarios;
+    private Stack historicoDePedidos;
+    private Queue<Pedido> pedidosAbertos;
 
     public Restaurante(String nome, String cnpj, Endereco endereco, int numMesas, List<Prato> cardapio) throws ExceptionRestaurante {
         setNome(nome);
@@ -17,8 +16,8 @@ public class Restaurante {
         setNumMesas(numMesas);
         setCardapio(cardapio);
         setComentarios(new Hashtable());
-        setPedidosAbertos(new Hashtable());
-        setHistoricoDePedidos(new Hashtable());
+        setPedidosAbertos(new ArrayDeque());
+        setHistoricoDePedidos(new Stack());
     }
 
     public Restaurante(String nome, String cnpj, Endereco endereco, int numMesas) throws ExceptionRestaurante {
@@ -28,8 +27,8 @@ public class Restaurante {
         setNumMesas(numMesas);
         setCardapio(new ArrayList());
         setComentarios(new Hashtable());
-        setPedidosAbertos(new Hashtable());
-        setHistoricoDePedidos(new Hashtable());
+        setPedidosAbertos(new ArrayDeque());
+        setHistoricoDePedidos(new Stack());
     }
 
     //Pegar nome restaurante
@@ -121,36 +120,36 @@ public class Restaurante {
     }
 
     //Colocar pedidos abertos
-    private void setPedidosAbertos(Dictionary pedidosAbertos) {
+    private void setPedidosAbertos(Queue pedidosAbertos) {
         this.pedidosAbertos = pedidosAbertos;
     }
 
     //Adicionar pedido aos abertos
     public void addPedidoAberto(Pedido pedido) throws ExceptionRestaurante {
         if (pedido != null)
-            pedidosAbertos.put(pedidosAbertos.size() + 1, pedido);
+            pedidosAbertos.add(pedido);
         else
             throw new ExceptionRestaurante("Pedido invalido");
     }
 
     //Pegar pedido em aberto
     public Pedido getPedidoAberto() {
-        return (Pedido) pedidosAbertos.get(1);
+        return (Pedido) pedidosAbertos.peek();
     }
 
     //Fechar primeiro pedido e adiciona-lo ao historico de pedido
     public Pedido fechaPrimeiroPedido() {
-        historicoDePedidos.put(pedidosAbertos.size() + 1, pedidosAbertos.get(1));
-        return (Pedido) pedidosAbertos.remove(1);
+        historicoDePedidos.add(pedidosAbertos.peek());
+        return (Pedido) pedidosAbertos.remove();
     }
 
     //Pegar historio de pedido
-    public Dictionary getHistoricoDePedidos() {
+    public Stack getHistoricoDePedidos() {
         return historicoDePedidos;
     }
 
     //Colocar historico de pedido
-    private void setHistoricoDePedidos(Dictionary historicoDePedidos) {
+    private void setHistoricoDePedidos(Stack historicoDePedidos) {
         this.historicoDePedidos = historicoDePedidos;
     }
 }
