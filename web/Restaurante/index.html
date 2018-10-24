@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="./imgs/logo.png" sizes="32X32">
+  <title>Ô Chefia</title>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.min.js">
+</head>
+
+<body>
+  <!-- NavBar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><img src="./imgs/logo.png" class="img-fluid" width="50" height="50" alt="Logo"> Ô Chefia</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Pedidos <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./html/prato.html">Pratos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Msg warning -->
+  <div id="msg">
+  </div>
+
+  <!-- Body -->
+  <div class="container">
+    <div class="card bg-dark text-light m-3">
+      <div class="card-header">
+        Pedido 1
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="closeBtn">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <h5 class="card-title text-left col-2">Mesa 1</h5>
+        </div>
+        <ul class="my-3" style="list-style-type: none">
+          <li class="card-text text-left">3x Haburger</li>
+          <li class="card-text text-left">1x Coca-Cola</li>
+          <li class="card-text text-left">2x Água</li>
+        </ul>
+        <div class="row">
+          <p class="card-title col-3">Atualizar status</p>
+          <div class="offset-4 col-5">
+            <button id="btnRecebido" type="button" class="btn btn-outline-primary">Recebido</button>
+            <button id="btnPreparo" type="button" class="btn btn-outline-warning">Em preparo</button>
+            <button id="btnSucesso" type="button" class="btn btn-outline-success">Pronto</button>
+            <button id="btnCancelado" type="button" class="btn btn-outline-danger">Cancelado</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <p>5 minutos atrás</p>
+      </div>
+    </div>
+  </div>
+  <!-- bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="./js/default.js"></script>
+  <script type="text/javascript" src="./js/index.js"></script>
+</body>
+
+</html>
