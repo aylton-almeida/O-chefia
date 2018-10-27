@@ -1,6 +1,9 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.*;
 
-public class Restaurante {
+public class Restaurante implements JsonFormatter {
     private String nome, cnpj;
     private Endereco endereco;
     private int numMesas;
@@ -152,4 +155,53 @@ public class Restaurante {
     private void setHistoricoDePedidos(Stack historicoDePedidos) {
         this.historicoDePedidos = historicoDePedidos;
     }
+
+    //Converte o carpadio em um vetor JSON
+    public JSONArray cardapioToJsonArray() {
+        JSONArray array = new JSONArray();
+        for (int i = 1; i < cardapio.size(); i++) {
+            array.put(cardapio.get(i).toJson());
+        }
+        return array;
+    }
+
+    //Conveter os commentarios em um vetor JSON
+    public JSONArray comentariosToJsonArray() {
+        JSONArray array = new JSONArray();
+        for (int i = 1; i < comentarios.size(); i++) {
+            array.put(((Comentario)comentarios.get(i)).toJson());
+        }
+        return array;
+    }
+
+    //Conveter o historico de pedidos em um vetor JSON
+    public JSONArray historicoToJsonArray() {
+        JSONArray array = new JSONArray();
+        for (int i = 1; i < historicoDePedidos.size(); i++) {
+            List<Pedido> list = new ArrayList;
+            list.add((Pedido)historicoDePedidos.peek());
+            array.put(historicoDePedidos.);
+        }
+        return array;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("nome", this.nome);
+        obj.put("cnpj", this.cnpj);
+        obj.put("endereco", this.endereco);
+        obj.put("numMesas", this.numMesas);
+        obj.put("cardapio", this.cardapioToJsonArray());
+        obj.put("comentarios", this.comentariosToJsonArray());
+        obj.put("historicoDePedidos", this.);
+        return obj;
+    }
+    private String nome, cnpj;
+    private Endereco endereco;
+    private int numMesas;
+    private List<Prato> cardapio;
+    private Dictionary comentarios;
+    private Stack historicoDePedidos;
+    private Queue<Pedido> pedidosAbertos;
 }

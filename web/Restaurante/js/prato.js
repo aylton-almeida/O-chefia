@@ -46,7 +46,7 @@ $('#btnSubmitPrato').click(() => {
     }
 
     if (xmlhttp) {
-      xmlhttp.open('get', 'http://127.0.0.1:7200', true);
+      xmlhttp.open('get', 'http://127.0.0.1:7200/cadastrarPratos', true);
       xmlhttp.send();
     }
   }

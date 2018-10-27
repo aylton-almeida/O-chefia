@@ -4,13 +4,10 @@ import org.simpleframework.http.Request;
 public class RestauranteService {
     private Restaurante restaurante;
 
-    public String addPratoCardapio(Request request){
+    //Add prato passado pir web ao cardápio
+    public String addPratoCardapio(Request request) throws ExceptionPrato, ExceptionRestaurante {
         Query query = request.getQuery();
-        try {
-            restaurante.addPratoCardapio(new Prato(query.get("nome"), Integer.parseInt(query.get("preco"))));
-            return "Prato adicionado";
-        }catch (Exception e){
-            return e.getMessage();
-        }
+        restaurante.addPratoCardapio(new Prato(query.get("nome"), Integer.parseInt(query.get("preco"))));
+        return "Prato adicionado";
     }
 }

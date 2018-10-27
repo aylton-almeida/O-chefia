@@ -26,12 +26,16 @@ public class URLMetodo implements Container {
             // Recupera a URL e o método utilizado.
 
             String path = request.getPath().getPath();
-            String method = request.getMethod();
-            String mensagem;
+            String mensagem = "";
 
             // Verifica qual ação está sendo chamada
 
-            mensagem = restaurante.addPratoCardapio(request);
+            if (path.startsWith("/cadastrarPratos"))
+            try{
+                mensagem = restaurante.addPratoCardapio(request);
+            }catch(Exception e){
+                mensagem = e.getMessage();
+            }
             this.enviaResposta(Status.CREATED, response, mensagem);
 
 

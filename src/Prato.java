@@ -1,17 +1,22 @@
-public class Prato {
+import org.json.JSONObject;
+
+public class Prato implements JsonFormatter {
     private String nome;
     private float preco;
 
+    //Construtor com nome e preco
     public Prato(String nome, float preco) throws ExceptionPrato {
         setNome(nome);
         setPreco(preco);
     }
 
+    //Construtor vazio
     public Prato() throws ExceptionPrato{
         setNome("Comida");
         setPreco(0.1F);
     }
 
+    //Alterar nome
     public void setNome(String nome) throws ExceptionPrato {
         if (nome != null && nome != "")
             this.nome = nome;
@@ -19,6 +24,7 @@ public class Prato {
             throw new ExceptionPrato("Nome invalido");
     }
 
+    //Alerar preco
     public void setPreco(float preco) throws ExceptionPrato {
         if (preco > 0)
             this.preco = preco;
@@ -26,11 +32,22 @@ public class Prato {
             throw new ExceptionPrato("Preço invalido");
     }
 
+    //Pegar nome
     public String getNome() {
         return nome;
     }
 
+    //Pegar preco
     public float getPreco() {
         return preco;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("nome", this.nome);
+        obj.put("preco", this.preco);
+        return obj;
     }
 }
