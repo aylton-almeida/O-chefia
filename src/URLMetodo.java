@@ -26,18 +26,20 @@ public class URLMetodo implements Container {
             // Recupera a URL e o método utilizado.
 
             String path = request.getPath().getPath();
-            String mensagem = "";
 
             // Verifica qual ação está sendo chamada
 
-            if (path.startsWith("/cadastrarPratos"))
-            try{
-                mensagem = restaurante.addPratoCardapio(request);
-            }catch(Exception e){
-                mensagem = e.getMessage();
+            if (path.startsWith("/cadastrarPratos")) {
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("status", 1);
+                    obj.put("message", restaurante.addPratoCardapio(request));
+                } catch (Exception e) {
+                    obj.put("status", 0);
+                    obj.put("message", e.getMessage());
+                }
+                this.enviaResposta(Status.CREATED, response, obj.toString());
             }
-            this.enviaResposta(Status.CREATED, response, mensagem);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,13 +62,6 @@ public class URLMetodo implements Container {
             body.println(str);
         body.close();
     }
-
-//    public JSONObject toJSON() throws JSONException {
-//        JSONObject json = new JSONObject();
-//        // json.put("id", id);
-//        // json.put("text", text);
-//        return json;
-//    }
 
     public static void main(String args[]) throws IOException {
 

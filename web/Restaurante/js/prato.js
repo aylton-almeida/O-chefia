@@ -35,19 +35,45 @@ function FactoryXMLHttpRequest() {
 
 //Cadastrar Pratos
 $('#btnSubmitPrato').click(() => {
-  if ($("#cadastrarPratoForm")[0].checkValidity()) {
+  if($("#cadastrarPratoForm")[0].checkValidity()) {
     //AJAX
-    var xmlhttp = FactoryXMLHttpRequest();
+  //   let xmlhttp = FactoryXMLHttpRequest();
+  //   let formData = new FormData();
+  //   formData.append
+  //
+  //   xmlhttp.onreadystatechange = function() {
+  //     if (xmlhttp.readyState == 4) {
+  //       let jsonObj = JSON.parse(xmlhttp.responseText);
+  //       msgSuccess(jsonObj.status);
+  //       $('#modalCadastroPratos').modal('hide');
+  //       $('#nomeInput').val("");
+  //       $('#precoInput').val("");
+  //       $('#ingredientesInput').val("");
+  //     }
+  //   }
+  //
+  //   if (xmlhttp) {
+  //     xmlhttp.open('get', 'http://127.0.0.1:7200/cadastrarPratos', true);
+  //     xmlhttp.send(formData);
+  //   }
+  // }else{
+  //   msgErrorModal("Preencha os campos corretamente");
+  // }
 
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == 4) {
-        console.log("ok");
-      }
+  //AJAX
+$.ajax({
+    url: 'http://127.0.0.1:7200/cadastrarPratos',
+    type: "POST",
+    data: ({
+        nome: $('#nomeInput').val(),
+        assunto: $('#precoInput').val(),
+        mensagem: $('#ingredientesInput').val()
+    }),
+    success: function () {
+        alert("Email enviado!")
+    },
+    error: function (event) {
+        console.log(event);
     }
-
-    if (xmlhttp) {
-      xmlhttp.open('get', 'http://127.0.0.1:7200/cadastrarPratos', true);
-      xmlhttp.send();
-    }
-  }
+})
 })

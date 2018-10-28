@@ -174,17 +174,17 @@ public class Restaurante implements JsonFormatter {
         return array;
     }
 
-    //Conveter o historico de pedidos em um vetor JSON
-    public JSONArray historicoToJsonArray() {
-        JSONArray array = new JSONArray();
-        for (int i = 1; i < historicoDePedidos.size(); i++) {
-            List<Pedido> list = new ArrayList;
-            list.add((Pedido)historicoDePedidos.peek());
-            array.put(historicoDePedidos.);
-        }
-        return array;
-    }
-
+//    //Conveter o historico de pedidos em um vetor JSON
+//    public JSONArray historicoToJsonArray() {
+//        JSONArray array = new JSONArray();
+//        for (int i = 1; i < historicoDePedidos.size(); i++) {
+//            List<Pedido> list = new ArrayList;
+//            list.add((Pedido)historicoDePedidos.peek());
+//            array.put(historicoDePedidos.);
+//        }
+//        return array;
+//    }
+//
     @Override
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
@@ -194,14 +194,14 @@ public class Restaurante implements JsonFormatter {
         obj.put("numMesas", this.numMesas);
         obj.put("cardapio", this.cardapioToJsonArray());
         obj.put("comentarios", this.comentariosToJsonArray());
-        obj.put("historicoDePedidos", this.);
+        //obj.put("historicoDePedidos", this.);
         return obj;
     }
-    private String nome, cnpj;
-    private Endereco endereco;
-    private int numMesas;
-    private List<Prato> cardapio;
-    private Dictionary comentarios;
-    private Stack historicoDePedidos;
-    private Queue<Pedido> pedidosAbertos;
+//    private String nome, cnpj;
+//    private Endereco endereco;
+//    private int numMesas;
+//    private List<Prato> cardapio;
+//    private Dictionary comentarios;
+//    private Stack historicoDePedidos;
+//    private Queue<Pedido> pedidosAbertos;
 }
