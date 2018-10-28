@@ -20,7 +20,7 @@ public class Comida extends Prato {
     }
 
     @Override
-    public float getPreco(){
+    public double getPreco(){
         return super.getPreco();
     }
 }

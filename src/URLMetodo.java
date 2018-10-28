@@ -35,8 +35,8 @@ public class URLMetodo implements Container {
                     obj.put("status", 1);
                     obj.put("message", restaurante.addPratoCardapio(request));
                 } catch (Exception e) {
-                    obj.put("status", 0);
-                    obj.put("message", e.getMessage());
+                    obj.put("status", e.getStackTrace());
+                    obj.put("message", e.getStackTrace());
                 }
                 this.enviaResposta(Status.CREATED, response, obj.toString());
             }
