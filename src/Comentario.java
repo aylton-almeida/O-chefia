@@ -1,6 +1,8 @@
+import org.json.JSONObject;
+
 import java.util.Date;
 
-public class Comentario {
+public class Comentario implements JsonFormatter {
     private String mensagem;
     private Cliente autor;
     private Date data;
@@ -25,5 +27,14 @@ public class Comentario {
 
     private void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("autor", this.autor);
+        obj.put("mensagem", this.mensagem);
+        obj.put("data", this.data);
+        return obj;
     }
 }
