@@ -1,11 +1,8 @@
-<<<<<<< HEAD
-import java.util.*;
-=======
-import org.json.JSONArray;
-import org.json.JSONObject;
->>>>>>> cadastrarPrato
 
 import java.util.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class Restaurante implements JsonFormatter {
     private String nome, cnpj;
@@ -15,17 +12,6 @@ public class Restaurante implements JsonFormatter {
     private Dictionary comentarios;
     private Stack historicoDePedidos;
     private Queue<Pedido> pedidosAbertos;
-
-    public Restaurante(String nome, String cnpj, Endereco endereco, int numMesas, List<Prato> cardapio) throws ExceptionRestaurante {
-        setNome(nome);
-        setCnpj(cnpj);
-        setEndereco(endereco);
-        setNumMesas(numMesas);
-        setCardapio(cardapio);
-        setComentarios(new Hashtable());
-        setPedidosAbertos(new ArrayDeque());
-        setHistoricoDePedidos(new Stack());
-    }
 
     public Restaurante(String nome, String cnpj, Endereco endereco, int numMesas) throws ExceptionRestaurante {
         setNome(nome);
@@ -45,7 +31,7 @@ public class Restaurante implements JsonFormatter {
 
     //Colocar nome no restaurante
     public void setNome(String nome) throws ExceptionRestaurante {
-        if (nome != null && nome.equals(""))
+        if (nome != null && !nome.equals(""))
             this.nome = nome;
         else
             throw new ExceptionRestaurante("Nome invalido");
@@ -58,7 +44,7 @@ public class Restaurante implements JsonFormatter {
 
     //Colocar cnpj no restaurante
     public void setCnpj(String cnpj) throws ExceptionRestaurante {
-        if (cnpj != null && cnpj.equals(""))
+        if (cnpj != null && !cnpj.equals(""))
             this.cnpj = cnpj;
         else
             throw new ExceptionRestaurante("CNPJ invalido");
@@ -100,7 +86,7 @@ public class Restaurante implements JsonFormatter {
             this.cardapio = new ArrayList();
     }
 
-    //Adicionar prato ao cardápio
+    //Adicionar prato ao cardï¿½pio
     public void addPratoCardapio(Prato prato) throws ExceptionRestaurante {
         if (prato != null)
             this.cardapio.add(prato);
@@ -159,14 +145,11 @@ public class Restaurante implements JsonFormatter {
     private void setHistoricoDePedidos(Stack historicoDePedidos) {
         this.historicoDePedidos = historicoDePedidos;
     }
-<<<<<<< HEAD
-}
-=======
 
     //Converte o carpadio em um vetor JSON
     public JSONArray cardapioToJsonArray() {
         JSONArray array = new JSONArray();
-        for (int i = 1; i < cardapio.size(); i++) {
+        for (int i = 0; i < cardapio.size(); i++) {
             array.put(cardapio.get(i).toJson());
         }
         return array;
@@ -204,6 +187,7 @@ public class Restaurante implements JsonFormatter {
         //obj.put("historicoDePedidos", this.);
         return obj;
     }
+
 //    private String nome, cnpj;
 //    private Endereco endereco;
 //    private int numMesas;
@@ -212,4 +196,3 @@ public class Restaurante implements JsonFormatter {
 //    private Stack historicoDePedidos;
 //    private Queue<Pedido> pedidosAbertos;
 }
->>>>>>> cadastrarPrato

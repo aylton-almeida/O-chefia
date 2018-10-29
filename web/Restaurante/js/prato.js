@@ -1,86 +1,92 @@
 //Click button cancelar modal
-<<<<<<< HEAD
-$('#btnCancelarModal').click(()=>{
-   $('#nomeInput').val("");
-   $('#precoInput').val("");
-   $('#ingredientesInput').val("");
-=======
 $('#btnCancelarModal').click(() => {
   $('#nomeInput').val("");
   $('#precoInput').val("");
   $('#ingredientesInput').val("");
 })
 
-//Definir navegador
-function FactoryXMLHttpRequest() {
-
-   if(window.XMLHttpRequest) {
-      return new XMLHttpRequest();// Opera 8.0+, Firefox, Chrome, Safari
-   }
-   else if (window.XDomainRequest) {
-      return new XDomainRequest(); // Antigo Safari
-   }
-   else if(window.ActiveXObject) {
-      var msxmls = new Array(// Internet Explorer
-                    'Msxml2.XMLHTTP',
-                    'Microsoft.XMLHTTP',
-                    'Msxml3.XMLHTTP',
-                    'Msxml2.XMLHTTP.7.0',
-                    'Msxml2.XMLHTTP.6.0',
-                    'Msxml2.XMLHTTP.5.0',
-                    'Msxml2.XMLHTTP.4.0',
-                    'Msxml2.XMLHTTP.3.0');
-      for (var i = 0; i < msxmls.length; i++) {
-         try {
-           return new ActiveXObject(msxmls[i]);
-         } catch (e) {
-         }
-      }
-   } else throw new Error("Could not instantiate XMLHttpRequest");
-}
-
 //Cadastrar Pratos
 $('#btnSubmitPrato').click(() => {
-  if($("#cadastrarPratoForm")[0].checkValidity()) {
-    //AJAX
-  //   let xmlhttp = FactoryXMLHttpRequest();
-  //   let formData = new FormData();
-  //   formData.append
-  //
-  //   xmlhttp.onreadystatechange = function() {
-  //     if (xmlhttp.readyState == 4) {
-  //       let jsonObj = JSON.parse(xmlhttp.responseText);
-  //       msgSuccess(jsonObj.status);
-  //       $('#modalCadastroPratos').modal('hide');
-  //       $('#nomeInput').val("");
-  //       $('#precoInput').val("");
-  //       $('#ingredientesInput').val("");
-  //     }
-  //   }
-  //
-  //   if (xmlhttp) {
-  //     xmlhttp.open('get', 'http://127.0.0.1:7200/cadastrarPratos', true);
-  //     xmlhttp.send(formData);
-  //   }
-  // }else{
-  //   msgErrorModal("Preencha os campos corretamente");
-  // }
+  if ($("#cadastrarPratoForm")[0].checkValidity()) {
 
-  //AJAX
-$.ajax({
-    url: 'http://127.0.0.1:7200/cadastrarPratos',
-    type: "POST",
-    data: ({
+    //AJAX
+    $.ajax({
+      url: 'http://127.0.0.1:7200/cadastrarPratos',
+      type: "POST",
+      data: ({
         nome: $('#nomeInput').val(),
-        assunto: $('#precoInput').val(),
-        mensagem: $('#ingredientesInput').val()
-    }),
-    success: function () {
-        alert("Email enviado!")
-    },
-    error: function (event) {
-        console.log(event);
-    }
+        preco: $('#precoInput').val(),
+        ingredientes: $('#ingredientesInput').val()
+      }),
+      success: function(response) {
+        if (response.status == 1) {
+          msgSuccess(response.message);
+        } else {
+          if (response.status == 0) {
+            msgError(response.message);
+            console.log(response.type);
+            console.log(response.stackTrace);
+          }
+        }
+        $('#modalCadastroPratos').modal('hide');
+        $('#nomeInput').val("");
+        $('#precoInput').val("");
+        $('#ingredientesInput').val("");
+      },
+      error: function(event) {
+        msgError(event);
+      }
+    })
+  } else {
+    msgErrorModal("Preencha os campos corretamente");
+  }
 })
->>>>>>> cadastrarPrato
+
+//Pegar Pratos
+$("document").ready(() => {
+  //AJAX
+  $.ajax({
+    url: 'http://127.0.0.1:7200/recuperarPratos',
+    type: "POST",
+    success: function(response) {
+      if (response.status == 1) {
+        response.obj.forEach((element) => {
+          //Gerar DOM objects
+          let divCard = document.createElement("div");
+          divCard.className = "card text-white bg-dark mb-3 mx-2 col-3";
+          let divBody = document.createElement("div");
+          divBody.className = "card-body";
+          let textTitle = document.createElement("h5");
+          textTitle.innerHTML = element.nome;
+          textTitle.className = "card-title";
+          let textIngredientes = document.createElement("p");
+          textIngredientes.innerHTML = element.ingredientes;
+          textIngredientes.className = "card-text";
+          let textPreco = document.createElement("p");
+          textPreco.innerHTML = "R$" + element.preco;
+          textPreco.className = "card-text";
+
+          //Colocar objetos na pagina
+          document.getElementById("cardsPratos").appendChild(divCard);
+          divCard.appendChild(divBody);
+          divBody.appendChild(textTitle);
+          divBody.appendChild(textIngredientes);
+          divBody.appendChild(textPreco);
+        })
+      } else {
+        if (response.status == 0) {
+          console.log(response.message);
+          console.log(response.type);
+          console.log(response.stackTrace);
+        }
+      }
+      $('#modalCadastroPratos').modal('hide');
+      $('#nomeInput').val("");
+      $('#precoInput').val("");
+      $('#ingredientesInput').val("");
+    },
+    error: function(event) {
+      msgError(event);
+    }
+  })
 })

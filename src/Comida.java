@@ -1,16 +1,16 @@
 public class Comida extends Prato {
-    private String[] ingredientes;
+    private String ingredientes;
 
-    public Comida(String nome, float preco, String[] ingredientes) throws ExceptionPrato{
-        super(nome, preco);
+    public Comida(String nome, float preco, String ingredientes) throws ExceptionPrato{
+        super(nome, preco, ingredientes);
         setIngredientes(ingredientes);
     }
 
-    public void setIngredientes(String[] ingredientes){
+    public void setIngredientes(String ingredientes){
         this.ingredientes = ingredientes;
     }
 
-    public String[] getIngredientes(){
+    public String getIngredientes(){
         return ingredientes;
     }
 
@@ -20,7 +20,7 @@ public class Comida extends Prato {
     }
 
     @Override
-    public float getPreco(){
+    public double getPreco(){
         return super.getPreco();
     }
 }
