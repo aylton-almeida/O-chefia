@@ -2,10 +2,12 @@ import org.json.JSONObject;
 
 public class Prato implements JsonFormatter {
     private String nome;
+    private String ingredientes;
     private double preco;
 
     //Construtor com nome e preco
-    public Prato(String nome, double preco) throws ExceptionPrato {
+    public Prato(String nome, double preco, String ingredientes) throws ExceptionPrato {
+        setIngredientes(ingredientes);
         setNome(nome);
         setPreco(preco);
     }
@@ -14,6 +16,7 @@ public class Prato implements JsonFormatter {
     public Prato() throws ExceptionPrato{
         setNome("Comida");
         setPreco(0.1);
+        setIngredientes("");
     }
 
     //Alterar nome
@@ -48,6 +51,15 @@ public class Prato implements JsonFormatter {
         JSONObject obj = new JSONObject();
         obj.put("nome", this.nome);
         obj.put("preco", this.preco);
+        obj.put("ingredientes", this.ingredientes);
         return obj;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
     }
 }

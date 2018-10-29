@@ -41,7 +41,7 @@ public class Restaurante implements JsonFormatter {
 
     //Colocar nome no restaurante
     public void setNome(String nome) throws ExceptionRestaurante {
-        if (nome != null && nome.equals(""))
+        if (nome != null && !nome.equals(""))
             this.nome = nome;
         else
             throw new ExceptionRestaurante("Nome invalido");
@@ -54,7 +54,7 @@ public class Restaurante implements JsonFormatter {
 
     //Colocar cnpj no restaurante
     public void setCnpj(String cnpj) throws ExceptionRestaurante {
-        if (cnpj != null && cnpj.equals(""))
+        if (cnpj != null && !cnpj.equals(""))
             this.cnpj = cnpj;
         else
             throw new ExceptionRestaurante("CNPJ invalido");
