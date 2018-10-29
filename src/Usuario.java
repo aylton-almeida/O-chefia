@@ -1,16 +1,11 @@
-<<<<<<< HEAD
-public class Usuario {
+import org.json.JSONObject;
+
+public class Usuario implements JsonFormatter {
     private String nome;
     private String senha;
     private String email;
     private String cpf;
     private String telefone;
-=======
-import org.json.JSONObject;
-
-public class Usuario implements JsonFormatter {
-    private String nome, senha, email, cpf, telefone;
->>>>>>> MostraRestaurante
 
     public Usuario(String nome, String senha, String email, String cpf, String telefone) throws ExceptionUsuario {
         setNome(nome);

@@ -5,7 +5,7 @@ import java.util.List;
 public class Grupo {
 	
 	private int numMesa;
-	private List<Cliente> clientes;
+	private List<Usuario> Usuarios;
 	private Instant dataAbertura;
 	private Instant dataFechamento;
 	private Dictionary historicoDePedidos;
@@ -21,14 +21,14 @@ public class Grupo {
 	public void setNumMesa(int numMesa) {
 		this.numMesa = numMesa;
 	}
-	public List<Cliente> getClientes() {
-		return clientes;
+	public List<Usuario> getUsuarios() {
+		return Usuarios;
 	}
-	public void adicionaCliente(Cliente novoCliente) {
-		getClientes().add(novoCliente);
+	public void adicionaUsuario(Usuario novoUsuario) {
+		getUsuarios().add(novoUsuario);
 	}
-	public void excluiCliente(Cliente clienteASerRemovido) {
-		getClientes().remove(clienteASerRemovido);
+	public void excluiUsuario(Usuario UsuarioASerRemovido) {
+		getUsuarios().remove(UsuarioASerRemovido);
 	}
 	public Instant getDataAbertura() {
 		return dataAbertura;
