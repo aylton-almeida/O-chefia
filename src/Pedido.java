@@ -1,16 +1,18 @@
+import java.time.Instant;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 public class Pedido {
 
-	private Calendar hora;
+	private Instant hora;
 	private float precoFinal;
-	private Item[] itens;
+	private List<Item> itens;
 	private String estado;// estados possíveis: Espera, Preparo, Finalizado, Cancelado
 	private int numMesa;
 	
-	public Pedido(Item[] itens, int numMesa) {
-		this.setHora(Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo")));
+	public Pedido(List<Item> itens, int numMesa) {
+		this.setHora(Instant.now());
 		this.setItens(itens);
 		this.setNumMesa(numMesa);
 		this.setEstado("Espera");
@@ -41,23 +43,16 @@ public class Pedido {
 	public boolean estaAberto() {
 		return this.getEstado() == "cancelado"? false : true;
 	}
-	
-	public Calendar getHora() {
-		return hora;
-	}
-	public void setHora(Calendar hora) {
-		this.hora = hora;
-	}
 	public float getPrecoFinal() {
 		return precoFinal;
 	}
 	public void setPrecoFinal(float precoFinal) {
 		this.precoFinal = precoFinal;
 	}
-	public Item[] getItens() {
+	public List <Item> getItens() {
 		return itens;
 	}
-	public void setItens(Item[] itens) {
+	public void setItens(List<Item> itens) {
 		this.itens = itens;
 	}
 	public String getEstado() {
@@ -71,5 +66,13 @@ public class Pedido {
 	}
 	public void setNumMesa(int numMesa) {
 		this.numMesa = numMesa;
+	}
+
+	public Instant getHora() {
+		return hora;
+	}
+
+	public void setHora(Instant hora) {
+		this.hora = hora;
 	}
 }

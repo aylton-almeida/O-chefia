@@ -1,5 +1,9 @@
 public class Usuario {
-    private String nome, senha, email, cpf, telefone;
+    private String nome;
+    private String senha;
+    private String email;
+    private String cpf;
+    private String telefone;
 
     public Usuario(String nome, String senha, String email, String cpf, String telefone) throws ExceptionUsuario {
         setNome(nome);

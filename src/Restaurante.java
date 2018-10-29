@@ -5,7 +5,8 @@ import org.json.JSONObject;
 
 
 public class Restaurante implements JsonFormatter {
-    private String nome, cnpj;
+    private String nome;
+    private String cnpj;
     private Endereco endereco;
     private int numMesas;
     private List<Prato> cardapio;

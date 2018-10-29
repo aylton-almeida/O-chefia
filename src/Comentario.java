@@ -1,5 +1,4 @@
 import org.json.JSONObject;
-
 import java.util.Date;
 
 public class Comentario implements JsonFormatter {
