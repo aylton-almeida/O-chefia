@@ -86,8 +86,8 @@ public class URLMetodo implements Container {
             if (path.startsWith("/cadastrarUsuario")) {
                 JSONObject obj = new JSONObject();
                 try {
-                    listUsuario.add(usuario.cadastroUsuario(request));
                     user = usuario.cadastroUsuario(request);
+                    listUsuario.add(user);
                     obj.put("status", 1);
                     obj.put("message", "Cadastro efetuado com sucesso");
                 } catch (Exception e) {
@@ -96,6 +96,7 @@ public class URLMetodo implements Container {
                     obj.put("stackTrace", e.getStackTrace());
                     obj.put("message", e.getMessage());
                 }
+                this.enviaResposta(Status.CREATED, response, obj.toString());
             }
 
             if (path.startsWith("/loginUsuario")) {
@@ -124,6 +125,7 @@ public class URLMetodo implements Container {
                     obj.put("status", -1);
                     obj.put("message", "Usuário não encontrado");
                 }
+                this.enviaResposta(Status.CREATED, response, obj.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
