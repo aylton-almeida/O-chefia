@@ -1,4 +1,6 @@
-public class Usuario {
+import org.json.JSONObject;
+
+public class Usuario implements JsonFormatter{
     private String nome, senha, email, cpf, telefone;
 
     public Usuario(String nome, String senha, String email, String cpf, String telefone) throws ExceptionUsuario {
@@ -67,11 +69,27 @@ public class Usuario {
             throw new ExceptionUsuario("Senha invalida");
     }
 
+    //Get senha
+    public String getSenha(){
+        return this.senha;
+    }
+
     //Altera a senha quando a senha atual passada for igual a senha do usuario
     public void alteraSenha(String senhaNova, String senhaAtual) throws ExceptionUsuario {
         if (senhaAtual == this.senha)
             setSenha(senhaNova);
         else
             throw new ExceptionUsuario("Senha atual invalida");
+    }
+
+    //Converter JSON
+    public JSONObject toJson(){
+        JSONObject obj = new JSONObject();
+        obj.put("nome", this.nome);
+        obj.put("senha", this.senha);
+        obj.put("email", this.email);
+        obj.put("cpf", this.cpf);
+        obj.put("telefone", this.telefone);
+        return obj;
     }
 }
