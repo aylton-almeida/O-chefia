@@ -105,9 +105,9 @@ public class URLMetodo implements Container {
                 Boolean achouUsuario = false;
                 Boolean senhaCorreta = false;
                 for (int i = 0; i < listUsuario.size(); i++) {
-                    if (listUsuario.get(i).getEmail() == query.get("email")) {
+                    if (listUsuario.get(i).getEmail().equals(query.get("email"))) {
                         achouUsuario = true;
-                        if (listUsuario.get(i).getSenha() == query.get("senha")) {
+                        if (listUsuario.get(i).getSenha().equals(query.get("senha"))) {
                             senhaCorreta = true;
                             user = listUsuario.get(i);
                         }
@@ -117,6 +117,7 @@ public class URLMetodo implements Container {
                     if (senhaCorreta) {
                         obj.put("status", 1);
                         obj.put("message", "Login efetuado com sucesso");
+                        obj.put("usuario", user.toJson());
                     } else {
                         obj.put("status", 0);
                         obj.put("message", "Senha incorreta");
