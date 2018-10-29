@@ -3,14 +3,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ClienteTest {
-    Cliente cliente;
+class UsuarioTest {
+    Usuario usuario;
 
     @BeforeEach
     void setUp() throws Exception{
         try{
-            cliente = new Cliente("nome", "senha123", "email@emaill.com");
-        }catch(ExceptionCliente e){
+            usuario = new Usuario("nome", "senha123", "email@emaill.com");
+        }catch(ExceptionUsuario e){
             System.out.println(e.getMessage());
         }
     }
@@ -18,8 +18,8 @@ class ClienteTest {
     @Test
     void testAlteraSenha(){
         try{
-            cliente.alteraSenha("123456789", "1234");
-        }catch (ExceptionCliente e){
+            usuario.alteraSenha("123456789", "1234");
+        }catch (ExceptionUsuario e){
             assertEquals("Senha atual invalida", e.getMessage(), "Senha invalida");
         }
     }

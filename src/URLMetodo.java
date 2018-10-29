@@ -1,4 +1,5 @@
 import java.awt.Desktop;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -17,6 +18,19 @@ import org.simpleframework.transport.connect.SocketConnection;
 
 public class URLMetodo implements Container {
 
+    //Dados estaticos
+    static RestauranteService restaurante = new RestauranteService();
+    static Restaurante jorge;
+
+    static {
+        try {
+            jorge = new Restaurante("Jorge's Burger", "123.456.789-36", new Endereco(), 20);
+            jorge.addPratoCardapio(new Prato("X-Bacon", 10, "Pão, hamburger bovino, bacon, queijo, alface"));
+            jorge.addPratoCardapio(new Prato("X-Burger", 10, "Pão, hamburger bovino, queijo, alface"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void handle(Request request, Response response) {
         try {
@@ -24,50 +38,40 @@ public class URLMetodo implements Container {
             // Recupera a URL e o método utilizado.
 
             String path = request.getPath().getPath();
-            String method = request.getMethod();
-            String mensagem;
 
             // Verifica qual ação está sendo chamada
 
-
-
-            if (path.startsWith("/cadastrarPrato") && "POST".equals(method)) {
-                mensagem = estoqueService.adicionarProduto(request);
-                this.enviaResposta(Status.CREATED, response, mensagem);
-
-            } else if (path.startsWith("/consultarProduto") && "GET".equals(method)) {
-                // http://127.0.0.1:880/consultarProduto?descricao=leite
-                mensagem = estoqueService.consultarProduto(request);
-                this.enviaResposta(Status.OK, response, mensagem);
-            } else if (path.startsWith("/removerProduto") && "GET".equals(method)) {
-                mensagem = estoqueService.removerProduto(request);
-                if (mensagem == null)
-                    this.naoEncontrado(response, path);
-                else {
-                    this.enviaResposta(Status.NO_CONTENT, response, null);
+            if (path.startsWith("/cadastrarPratos")) {
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("status", 1);
+                    obj.put("message", restaurante.addPratoCardapio(request, jorge));
+                } catch (Exception e) {
+                    obj.put("status", 0);
+                    obj.put("type", e.getClass());
+                    obj.put("stackTrace", e.getStackTrace());
+                    obj.put("message", e.getMessage());
                 }
-            } else if (path.startsWith("/totalEmEstoque") && "GET".equals(method)) {
-                // http://127.0.0.1:880/totalEmEstoque
-                mensagem = estoqueService.totalEmEstoque(request);
-                this.enviaResposta(Status.OK, response, mensagem);
-            } else if (path.startsWith("/valorEmEstoque") && "GET".equals(method)) {
-                // http://127.0.0.1:880/valorEmEstoque
-                mensagem = estoqueService.valorEmEstoque(request);
-                this.enviaResposta(Status.OK, response, mensagem);
-            } else {
-                this.naoEncontrado(response, path);
+                this.enviaResposta(Status.CREATED, response, obj.toString());
+            }
+
+            if (path.startsWith("/recuperarPratos")) {
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("status", 1);
+                    obj.put("obj", jorge.cardapioToJsonArray());
+                } catch (Exception e) {
+                    obj.put("status", 0);
+                    obj.put("type", e.getClass());
+                    obj.put("stackTrace", e.getStackTrace());
+                    obj.put("message", e.getMessage());
+                }
+                this.enviaResposta(Status.CREATED, response, obj.toString());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void naoEncontrado(Response response, String path) throws Exception {
-        JSONObject error = new JSONObject();
-        error.put("error", "Não encontrado.");
-        error.put("path", path);
-        enviaResposta(Status.NOT_FOUND, response, error.toString());
     }
 
     private void enviaResposta(Status status, Response response, String str) throws Exception {
@@ -76,7 +80,8 @@ public class URLMetodo implements Container {
         long time = System.currentTimeMillis();
 
         response.setValue("Content-Type", "application/json");
-        response.setValue("Server", "Controle de estoqueService (1.0)");
+        response.setValue("Server", "Gestão de restaurantes (1.0)");
+        response.setValue("Access-Control-Allow-Origin", "null");
         response.setDate("Date", time);
         response.setDate("Last-Modified", time);
         response.setStatus(status);
@@ -86,23 +91,9 @@ public class URLMetodo implements Container {
         body.close();
     }
 
-    public JSONObject toJSON() throws JSONException {
-        JSONObject json = new JSONObject();
-        // json.put("id", id);
-        // json.put("text", text);
-        return json;
-    }
+    public static void main(String args[]) throws IOException {
 
-    public static void main(String[] list) throws Exception {
-
-        // Instancia o estoqueService Service
-        estoqueService = new EstoqueService();
-
-        // Se você receber uma mensagem
-        // "Address already in use: bind error",
-        // tente mudar a porta.
-
-        int porta = 880;
+        int porta = 7200;
 
         // Configura uma conexão soquete para o servidor HTTP.
         Container container = new URLMetodo();
@@ -110,9 +101,6 @@ public class URLMetodo implements Container {
         Connection conexao = new SocketConnection(servidor);
         SocketAddress endereco = new InetSocketAddress(porta);
         conexao.connect(endereco);
-
-        // Testa a conexão abrindo o navegador padrão.
-        Desktop.getDesktop().browse(new URI("http://127.0.0.1:" + porta));
 
         System.out.println("Tecle ENTER para interromper o servidor...");
         System.in.read();

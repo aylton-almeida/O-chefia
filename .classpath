@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Excecoes"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Testes"/>
+	<classpathentry kind="lib" path="Libraries/JSON Java/gson-2.8.0.jar"/>
+	<classpathentry kind="lib" path="Libraries/JSON Java/json-20160810.jar"/>
+	<classpathentry kind="lib" path="Libraries/Simple Java/simple-common-6.0.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/Simple Java/simple-http-6.0.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/Simple Java/simple-transport-6.0.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/Simple Java/simple-xml-2.7.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

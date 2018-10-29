@@ -1,10 +1,11 @@
-public class ExceptionCliente extends Exception{
+public class ExceptionUsuario extends Exception{
     private String message;
 
-    public ExceptionCliente(String message){
+    public ExceptionUsuario(String message){
         this.message = message;
     }
 
+    @Override
     public String getMessage(){
         return this.message;
     }
