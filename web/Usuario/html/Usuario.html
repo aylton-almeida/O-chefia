@@ -113,6 +113,8 @@
                 sessionStorage.setItem('usuario', JSON.stringify(usuario));
                 sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
                 window.location.href = "../index.html";
+              }else {
+                msgError(response.message);
               }
             },
             error: function(event) {
