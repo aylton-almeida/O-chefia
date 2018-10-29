@@ -28,29 +28,54 @@
           </a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="./Cardapio.html">Cardápio
+          <a class="nav-link" href="./Usuario.html">Cadastro de Usuario
             <span class="sr-only">(current)</a>
         </li>
       </ul>
-    </div>
   </nav>
 
   <!-- Msg warning -->
   <div id="msg">
   </div>
 
-  <div class="container-flex">
-      <div class="row my-3">
-        <div class="offset-1 col align-self-start">
-          Cardápio Indisponivel
+  <div class="container my-4">
+    <div class="col-xs-2 col-center-block">
+      <h5 class="modal-title" id="modalCadastroPratos">Cadastro de Usuario</h5>
+      </button>
+      <form id="cadastrarPratoForm" name="cadastrarPratoForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="nomeInput">Nome</label>
+          <input type="text" class="form-control" name="nome" id="nomeInput" placeholder="Nome" required>
         </div>
-        <div class="col align-self-center">
-            <a class="nav-link" href="../index.html"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalCadastroPratos">Voltar para os Restaurantes</button></a>
+        <div class="form-group">
+          <label for="nomeInput">E-mail</label>
+          <input type="text" class="form-control" name="E-mail" id="nomeInput" placeholder="E-mail" required>
         </div>
-        <div class="col align-self-end">
+        <div class="form-group">
+          <label for="precoInput">Senha</label>
+          <input type="password" class="form-control" name="senha" id="senhaInput" placeholder="Senha" required>
         </div>
+        <div class="form-group">
+          <label for="precoInput">Confirmação Senha</label>
+          <input type="password" class="form-control" name="senha" id="senhaInput" placeholder="Senha" required>
+        </div>
+        <div class="form-group">
+          <label for="precoInput">CPF</label>
+          <input type="Number" class="form-control" name="senha" id="senhaInput" placeholder="CPF" required>
+        </div>
+        <div class="form-group">
+          <label for="precoInput">Telefone</label>
+          <input type="Number" class="form-control" name="senha" id="senhaInput" placeholder="Telefone" required>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" id="btnSubmitUsuario">Concluir</button>
+        <a href="../index.html">
+          <button type="button" class="btn btn-danger" id="btnCancelarUsuario">Cancelar</button>
+        </a>
       </div>
     </div>
+  </div>
 
   <!-- bootstrap js -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

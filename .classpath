@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="Libraries/Simple Java/simple-http-6.0.1.jar"/>
 	<classpathentry kind="lib" path="Libraries/Simple Java/simple-transport-6.0.1.jar"/>
 	<classpathentry kind="lib" path="Libraries/Simple Java/simple-xml-2.7.1.jar"/>
+	<classpathentry kind="src" path="/Ex48_AJAXJson"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
