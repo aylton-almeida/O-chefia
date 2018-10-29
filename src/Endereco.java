@@ -1,5 +1,5 @@
 
-abstract class Endereco {
+public class Endereco {
 	private int numero;
 	private String rua;
 	private String bairro;

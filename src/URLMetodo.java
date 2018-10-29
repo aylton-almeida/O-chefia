@@ -18,7 +18,19 @@ import org.simpleframework.transport.connect.SocketConnection;
 
 public class URLMetodo implements Container {
 
-    private static RestauranteService restaurante = new RestauranteService();
+    //Dados estaticos
+    static RestauranteService restaurante = new RestauranteService();
+    static Restaurante jorge;
+
+    static {
+        try {
+            jorge = new Restaurante("Jorge's Burger", "123.456.789-36", new Endereco(), 20);
+            jorge.addPratoCardapio(new Prato("X-Bacon", 10, "Pão, hamburger bovino, bacon, queijo, alface"));
+            jorge.addPratoCardapio(new Prato("X-Burger", 10, "Pão, hamburger bovino, queijo, alface"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void handle(Request request, Response response) {
         try {
@@ -33,9 +45,25 @@ public class URLMetodo implements Container {
                 JSONObject obj = new JSONObject();
                 try {
                     obj.put("status", 1);
-                    obj.put("message", restaurante.addPratoCardapio(request));
+                    obj.put("message", restaurante.addPratoCardapio(request, jorge));
                 } catch (Exception e) {
                     obj.put("status", 0);
+                    obj.put("type", e.getClass());
+                    obj.put("stackTrace", e.getStackTrace());
+                    obj.put("message", e.getMessage());
+                }
+                this.enviaResposta(Status.CREATED, response, obj.toString());
+            }
+
+            if (path.startsWith("/recuperarPratos")) {
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("status", 1);
+                    obj.put("obj", jorge.cardapioToJsonArray());
+                } catch (Exception e) {
+                    obj.put("status", 0);
+                    obj.put("type", e.getClass());
+                    obj.put("stackTrace", e.getStackTrace());
                     obj.put("message", e.getMessage());
                 }
                 this.enviaResposta(Status.CREATED, response, obj.toString());

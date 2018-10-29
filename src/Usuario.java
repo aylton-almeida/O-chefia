@@ -1,7 +1,7 @@
-public class Cliente {
+public class Usuario {
     private String nome, senha, email, cpf, telefone;
 
-    public Cliente(String nome, String senha, String email, String cpf, String telefone) throws ExceptionCliente {
+    public Usuario(String nome, String senha, String email, String cpf, String telefone) throws ExceptionUsuario {
         setNome(nome);
         setSenha(senha);
         setEmail(email);
@@ -9,7 +9,7 @@ public class Cliente {
         setTelefone(telefone);
     }
 
-    public Cliente(String nome, String senha, String email) throws ExceptionCliente {
+    public Usuario(String nome, String senha, String email) throws ExceptionUsuario {
         setNome(nome);
         setSenha(senha);
         setEmail(email);
@@ -22,11 +22,11 @@ public class Cliente {
     }
 
     //Coloca um nome valido
-    public void setNome(String nome) throws ExceptionCliente {
+    public void setNome(String nome) throws ExceptionUsuario {
         if (nome != null && nome != "")
             this.nome = nome;
         else
-            throw new ExceptionCliente("Nome invalido");
+            throw new ExceptionUsuario("Nome invalido");
     }
 
     public String getEmail() {
@@ -34,11 +34,11 @@ public class Cliente {
     }
 
     //Coloca um email valido
-    public void setEmail(String email) throws ExceptionCliente {
+    public void setEmail(String email) throws ExceptionUsuario {
         if (email != null && email != "")
             this.email = email;
         else
-            throw new ExceptionCliente("Email invalido");
+            throw new ExceptionUsuario("Email invalido");
     }
 
     public String getCpf() {
@@ -60,18 +60,18 @@ public class Cliente {
     }
 
     //Coloca uma senha não nula ou vazia e maior de 8 caracteres
-    private void setSenha(String senha) throws ExceptionCliente {
+    private void setSenha(String senha) throws ExceptionUsuario {
         if (senha != null && senha != "" && senha.length() >= 8)
             this.senha = senha;
         else
-            throw new ExceptionCliente("Senha invalida");
+            throw new ExceptionUsuario("Senha invalida");
     }
 
-    //Altera a senha quando a senha atual passada for igual a senha do cliente
-    public void alteraSenha(String senhaNova, String senhaAtual) throws ExceptionCliente {
+    //Altera a senha quando a senha atual passada for igual a senha do usuario
+    public void alteraSenha(String senhaNova, String senhaAtual) throws ExceptionUsuario {
         if (senhaAtual == this.senha)
             setSenha(senhaNova);
         else
-            throw new ExceptionCliente("Senha atual invalida");
+            throw new ExceptionUsuario("Senha atual invalida");
     }
 }

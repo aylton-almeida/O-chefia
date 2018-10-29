@@ -4,20 +4,20 @@ import java.util.Date;
 
 public class Comentario implements JsonFormatter {
     private String mensagem;
-    private Cliente autor;
+    private Usuario autor;
     private Date data;
 
-    public Comentario (String mensagem, Cliente autor){
+    public Comentario (String mensagem, Usuario autor){
         setMensagem(mensagem);
         setAutor(autor);
         this.data = new Date();
     }
 
-    public Cliente getAutor() {
+    public Usuario getAutor() {
         return autor;
     }
 
-    private void setAutor(Cliente autor) {
+    private void setAutor(Usuario autor) {
         this.autor = autor;
     }
 
