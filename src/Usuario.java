@@ -1,4 +1,6 @@
-public class Usuario {
+import org.json.JSONObject;
+
+public class Usuario implements JsonFormatter {
     private String nome, senha, email, cpf, telefone;
 
     public Usuario(String nome, String senha, String email, String cpf, String telefone) throws ExceptionUsuario {
@@ -63,8 +65,17 @@ public class Usuario {
     private void setSenha(String senha) throws ExceptionUsuario {
         if (senha != null && senha != "" && senha.length() >= 8)
             this.senha = senha;
-        else
-            throw new ExceptionUsuario("Senha invalida");
+        else {
+            if (senha == null || senha == "")
+                throw new ExceptionUsuario("Senha invalida");
+            else
+                throw new ExceptionUsuario("Sua senha deve ter pelo menos 8 caracteres");
+        }
+    }
+
+    //Get senha
+    public String getSenha() {
+        return this.senha;
     }
 
     //Altera a senha quando a senha atual passada for igual a senha do usuario
@@ -73,5 +84,16 @@ public class Usuario {
             setSenha(senhaNova);
         else
             throw new ExceptionUsuario("Senha atual invalida");
+    }
+
+    //Converter JSON
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("nome", this.nome);
+        obj.put("senha", this.senha);
+        obj.put("email", this.email);
+        obj.put("cpf", this.cpf);
+        obj.put("telefone", this.telefone);
+        return obj;
     }
 }
