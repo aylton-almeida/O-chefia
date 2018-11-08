@@ -4,12 +4,15 @@ public class Prato implements JsonFormatter {
     private String nome;
     private String ingredientes;
     private double preco;
+    //Prato principal = 1/Bebida = 2/Sobremesa = 3
+    private int tipo;
 
     //Construtor com nome e preco
-    public Prato(String nome, double preco, String ingredientes) throws ExceptionPrato {
+    public Prato(String nome, double preco, String ingredientes, int tipo) throws ExceptionPrato {
         setIngredientes(ingredientes);
         setNome(nome);
         setPreco(preco);
+        setTipo(tipo);
     }
 
     //Construtor vazio
@@ -52,6 +55,7 @@ public class Prato implements JsonFormatter {
         obj.put("nome", this.nome);
         obj.put("preco", this.preco);
         obj.put("ingredientes", this.ingredientes);
+        obj.put("tipo", this.tipo);
         return obj;
     }
 
@@ -61,5 +65,13 @@ public class Prato implements JsonFormatter {
 
     public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 }

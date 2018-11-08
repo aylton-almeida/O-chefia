@@ -23,6 +23,10 @@ public class Usuario implements JsonFormatter {
         setTelefone(null);
     }
 
+    public Usuario (){
+
+    }
+
     public String getNome() {
         return nome;
     }
