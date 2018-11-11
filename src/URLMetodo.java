@@ -3,6 +3,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
@@ -48,9 +49,6 @@ public class URLMetodo implements Container {
                         listRestaurante.add(mapper.readValue(line, Restaurante.class));
                     }
                     reader.close();
-
-                    File file = new File("arquivos/restaurantes");
-                    file.delete();
                     writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/restaurantes")));
                     Query query = request.getQuery();
                     Boolean achouRestaurante = false;
@@ -61,6 +59,7 @@ public class URLMetodo implements Container {
                             obj.put("message", restaurante.addPratoCardapio(request, listRestaurante.get(i)));
                         }
                     }
+                    for (Restaurante r : listRestaurante) writer.println(r.toJson());
                     if (!achouRestaurante) {
                         obj.put("status", -1);
                         obj.put("message", "Restaurante não encontrado");
@@ -71,7 +70,6 @@ public class URLMetodo implements Container {
                     obj.put("stackTrace", e.getStackTrace());
                     obj.put("message", e.getMessage());
                 } finally {
-                    for (Restaurante r : listRestaurante) writer.println(r.toJson());
                     if (writer != null)
                         writer.close();
                     if (reader != null)
@@ -185,8 +183,9 @@ public class URLMetodo implements Container {
                                 String line;
                                 try {
                                     reader = new BufferedReader(new FileReader("arquivos/restaurantes"));
-                                    while ((line = reader.readLine()) != null)
+                                    while ((line = reader.readLine()) != null) {
                                         listRestaurante.add(mapper.readValue(line, Restaurante.class));
+                                    }
                                     for (Restaurante r : listRestaurante) {
                                         array.put(r.toJson());
                                     }
@@ -205,7 +204,7 @@ public class URLMetodo implements Container {
                                     this.enviaResposta(Status.CREATED, response, obj.toString());
                                 }
                             } else {
-                                //cadastro Usuario restaurante
+                                //cadastro Usuario/restaurante
                                 if (path.startsWith("/cadastrarRestauranteUsuario")) {
                                     JSONObject obj = new JSONObject();
                                     try {
