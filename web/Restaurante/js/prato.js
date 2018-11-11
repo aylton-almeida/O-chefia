@@ -17,7 +17,8 @@ $('#btnSubmitPrato').click(() => {
         nome: $('#nomeInput').val(),
         preco: $('#precoInput').val(),
         ingredientes: $('#ingredientesInput').val(),
-        tipo: $("input[name=tipo]:checked").val()
+        tipo: $("input[name=tipo]:checked").val(),
+        nomeRestaurante: user.restaurante.nome
       }),
       success: function(response) {
         if (response.status == 1) {
@@ -49,6 +50,9 @@ $("document").ready(() => {
   $.ajax({
     url: 'http://127.0.0.1:7200/recuperarPratos',
     type: "POST",
+    data: ({
+      nomeRestaurante: user.restaurante.nome
+    }),
     success: function(response) {
       if (response.status == 1) {
         response.obj.forEach((element) => {

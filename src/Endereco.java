@@ -17,6 +17,8 @@ public class Endereco implements JsonFormatter {
         setUf(uf);
     }
 
+    public Endereco () {}
+
     public int getNumero() {
         return numero;
     }

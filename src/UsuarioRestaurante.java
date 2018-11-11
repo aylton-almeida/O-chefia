@@ -1,4 +1,6 @@
-public class UsuarioRestaurante extends Usuario{
+import org.json.JSONObject;
+
+public class UsuarioRestaurante extends Usuario implements JsonFormatter{
     private Restaurante restaurante;
 
     public UsuarioRestaurante(Restaurante restaurante, Usuario usuario) throws ExceptionUsuario{
@@ -12,5 +14,13 @@ public class UsuarioRestaurante extends Usuario{
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+    }
+
+    @Override
+    public JSONObject toJson(){
+        JSONObject obj = new JSONObject();
+        obj.put("restaurante", restaurante.toJson());
+        obj.put("usuario", super.toJson());
+        return obj;
     }
 }

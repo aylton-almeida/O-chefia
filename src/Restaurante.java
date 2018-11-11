@@ -14,7 +14,6 @@ public class Restaurante implements JsonFormatter {
     private int numMesas;
     private String telefone;
     private List<Prato> cardapio;
-    private Dictionary comentarios;
     private List<Pedido> historicoDePedidos;
     private Queue<Pedido> pedidosAbertos;
 
@@ -24,11 +23,12 @@ public class Restaurante implements JsonFormatter {
         setEndereco(endereco);
         setNumMesas(numMesas);
         setCardapio(new ArrayList());
-        setComentarios(new Hashtable());
         setPedidosAbertos(new ArrayDeque());
         setHistoricoDePedidos(new ArrayList<>());
         setTelefone(telefone);
     }
+
+    public Restaurante(){}
 
     //Pegar nome restaurante
     public String getNome() {
@@ -100,24 +100,6 @@ public class Restaurante implements JsonFormatter {
             throw new ExceptionRestaurante("Prato invalido");
     }
 
-    //Pegar comentarios
-    public Dictionary getComentarios() {
-        return comentarios;
-    }
-
-    //Colocar comentarios
-    private void setComentarios(Dictionary comentarios) {
-        this.comentarios = comentarios;
-    }
-
-    //Adicionar comentario a lista
-    public void addComentario(Comentario comentario) throws ExceptionRestaurante {
-        if (comentario != null)
-            this.comentarios.put(comentarios.size() + 1, comentario);
-        else
-            throw new ExceptionRestaurante("Comentario invalido");
-    }
-
     //Colocar pedidos abertos
     private void setPedidosAbertos(Queue pedidosAbertos) {
         this.pedidosAbertos = pedidosAbertos;
@@ -161,15 +143,6 @@ public class Restaurante implements JsonFormatter {
         return array;
     }
 
-    //Conveter os commentarios em um vetor JSON
-    public JSONArray comentariosToJsonArray() {
-        JSONArray array = new JSONArray();
-        for (int i = 1; i < comentarios.size(); i++) {
-            array.put(((Comentario)comentarios.get(i)).toJson());
-        }
-        return array;
-    }
-
     //Conveter o historico de pedidos em um vetor JSON
     public JSONArray historicoToJsonArray() {
         JSONArray array = new JSONArray();
@@ -197,7 +170,6 @@ public class Restaurante implements JsonFormatter {
         obj.put("numMesas", this.numMesas);
         obj.put("telefone", this.telefone);
         obj.put("cardapio", this.cardapioToJsonArray());
-        obj.put("comentarios", this.comentariosToJsonArray());
         obj.put("historicoDePedidos", this.historicoToJsonArray());
         obj.put("pedidosAbertos", pedidosAbertoToJsonArray());
         return obj;

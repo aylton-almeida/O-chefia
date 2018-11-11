@@ -20,29 +20,15 @@ import org.simpleframework.transport.connect.SocketConnection;
 public class URLMetodo implements Container {
 
     //Dados estaticos
-    static RestauranteService restaurante = new RestauranteService();
-    static UsuarioService usuario = new UsuarioService();
-    static Restaurante jorge;
-    static Restaurante XCBurger;
-    static List<Usuario> listUsuario = new ArrayList<>();
-    static List<Restaurante> listRestaurante = new ArrayList<>();
-    static Usuario user, pedro, aylton, lucas;
-    static PrintWriter writer = null;
-    static BufferedReader reader = null;
-    ObjectMapper mapper = new ObjectMapper();
-
-    static {
-        try {
-            jorge = new Restaurante("Jorge's Burger", "123.456.789-36", new Endereco(413, "rua jorge", "santo antonio", 31123232, "belo horizonte", "Minas gerais"), 20, "31 99938-5992");
-            XCBurger = new Restaurante("XCBurger", "132.312.434-43", new Endereco(123, "x", "x", 12312, "São Paulo", "São Paulo"), 15, "31 3112-3223");
-            jorge.addPratoCardapio(new Prato("X-Bacon", 10, "Pão, hamburger bovino, bacon, queijo, alface", 1));
-            jorge.addPratoCardapio(new Prato("X-Burger", 10, "Pão, hamburger bovino, queijo, alface", 1));
-            listRestaurante.add(jorge);
-            listRestaurante.add(XCBurger);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private static RestauranteService restaurante = new RestauranteService();
+    private static UsuarioService usuario = new UsuarioService();
+    private static List<Usuario> listUsuario = new ArrayList<>();
+    private static List<Restaurante> listRestaurante = new ArrayList<>();
+    private static Usuario user, userRestaurante;
+    private static Restaurante res;
+    private static PrintWriter writer = null;
+    private static BufferedReader reader = null;
+    private static ObjectMapper mapper = new ObjectMapper();
 
     public void handle(Request request, Response response) {
         try {
@@ -56,12 +42,15 @@ public class URLMetodo implements Container {
             if (path.startsWith("/cadastrarPratos")) {
                 JSONObject obj = new JSONObject();
                 try {
-                    writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/restaurantes", false)));
                     reader = new BufferedReader(new FileReader("arquivos/restaurantes"));
                     String line;
                     while ((line = reader.readLine()) != null) {
                         listRestaurante.add(mapper.readValue(line, Restaurante.class));
                     }
+                    reader.close();
+                    File file = new File("arquivos/restaurantes");
+                    file.delete();
+                    writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/restaurantes")));
                     Query query = request.getQuery();
                     Boolean achouRestaurante = false;
                     for (int i = 0; i < listRestaurante.size(); i++) {
@@ -69,10 +58,10 @@ public class URLMetodo implements Container {
                             achouRestaurante = true;
                             obj.put("status", 1);
                             obj.put("message", restaurante.addPratoCardapio(request, listRestaurante.get(i)));
-                            for (Restaurante r: listRestaurante) writer.println(r.toJson());
+                            for (Restaurante r : listRestaurante) writer.println(r.toJson());
                         }
                     }
-                    if (!achouRestaurante){
+                    if (!achouRestaurante) {
                         obj.put("status", -1);
                         obj.put("message", "Restaurante não encontrado");
                     }
@@ -82,8 +71,11 @@ public class URLMetodo implements Container {
                     obj.put("stackTrace", e.getStackTrace());
                     obj.put("message", e.getMessage());
                 } finally {
-                    writer.close();
-                    reader.close();
+                    if (writer != null)
+                        writer.close();
+                    if (reader != null)
+                        reader.close();
+                    listRestaurante = new ArrayList<>();
                     this.enviaResposta(Status.CREATED, response, obj.toString());
                 }
             } else {
@@ -91,15 +83,34 @@ public class URLMetodo implements Container {
                 if (path.startsWith("/recuperarPratos")) {
                     JSONObject obj = new JSONObject();
                     try {
-                        obj.put("status", 1);
-                        obj.put("obj", jorge.cardapioToJsonArray());
+                        reader = new BufferedReader(new FileReader("arquivos/restaurantes"));
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            listRestaurante.add(mapper.readValue(line, Restaurante.class));
+                        }
+                        Query query = request.getQuery();
+                        boolean achou = false;
+                        for (Restaurante aListRestaurante : listRestaurante) {
+                            if (aListRestaurante.getNome().equals(query.get("nomeRestaurante"))) {
+                                achou = true;
+                                obj.put("status", 1);
+                                obj.put("message", "Pratos recuperados");
+                                obj.put("obj", aListRestaurante.cardapioToJsonArray());
+                            }
+                        }
+                        if (!achou) {
+                            obj.put("status", 1);
+                            obj.put("message", "Restaurante não encontrado");
+                        }
                     } catch (Exception e) {
                         obj.put("status", 0);
                         obj.put("type", e.getClass());
                         obj.put("stackTrace", e.getStackTrace());
                         obj.put("message", e.getMessage());
+                    } finally {
+                        reader.close();
+                        this.enviaResposta(Status.CREATED, response, obj.toString());
                     }
-                    this.enviaResposta(Status.CREATED, response, obj.toString());
                 } else {
                     //Cadastro de usuários
                     if (path.startsWith("/cadastrarUsuario")) {
@@ -138,14 +149,14 @@ public class URLMetodo implements Container {
                                 reader.close();
                             }
                             Query query = request.getQuery();
-                            Boolean achouUsuario = false;
-                            Boolean senhaCorreta = false;
-                            for (int i = 0; i < listUsuario.size(); i++) {
-                                if (listUsuario.get(i).getEmail().equals(query.get("email"))) {
+                            boolean achouUsuario = false;
+                            boolean senhaCorreta = false;
+                            for (Usuario aListUsuario : listUsuario) {
+                                if (aListUsuario.getEmail().equals(query.get("email"))) {
                                     achouUsuario = true;
-                                    if (listUsuario.get(i).getSenha().equals(query.get("senha"))) {
+                                    if (aListUsuario.getSenha().equals(query.get("senha"))) {
                                         senhaCorreta = true;
-                                        user = listUsuario.get(i);
+                                        user = aListUsuario;
                                     }
                                 }
                             }
@@ -169,10 +180,14 @@ public class URLMetodo implements Container {
                             if (path.startsWith("/recuperarRestaurantes")) {
                                 JSONObject obj = new JSONObject();
                                 JSONArray array = new JSONArray();
-                                for (Restaurante r : listRestaurante) {
-                                    array.put(r.toJson());
-                                }
+                                String line;
                                 try {
+                                    reader = new BufferedReader(new FileReader("arquivos/restaurantes"));
+                                    while ((line = reader.readLine()) != null)
+                                        listRestaurante.add(mapper.readValue(line, Restaurante.class));
+                                    for (Restaurante r : listRestaurante) {
+                                        array.put(r.toJson());
+                                    }
                                     obj.put("status", 1);
                                     obj.put("message", "Foram recuperados " + listRestaurante.size() + " restaurantes");
                                     obj.put("array", array);
@@ -181,57 +196,35 @@ public class URLMetodo implements Container {
                                     obj.put("type", e.getClass());
                                     obj.put("stackTrace", e.getStackTrace());
                                     obj.put("message", e.getMessage());
+                                } finally {
+                                    if (reader != null)
+                                        reader.close();
+                                    listRestaurante = new ArrayList<>();
+                                    this.enviaResposta(Status.CREATED, response, obj.toString());
                                 }
-                                this.enviaResposta(Status.CREATED, response, obj.toString());
-                            }else{
-                                //Login Usuario restaurante
-                                if (path.startsWith("/loginUsuarioRestaurante")){
+                            } else {
+                                //cadastro Usuario restaurante
+                                if (path.startsWith("/cadastrarRestauranteUsuario")) {
                                     JSONObject obj = new JSONObject();
                                     try {
-                                        reader = new BufferedReader(new FileReader("arquivos/usuariosRestaurante"));
-                                        String line;
-                                        while ((line = reader.readLine()) != null) {
-                                            listUsuario.add(mapper.readValue(line, Usuario.class));
-                                        }
+                                        userRestaurante = usuario.cadastroUsuarioRestaurante(request);
+                                        writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/usuariosRestaurantes", true)));
+                                        writer.println(userRestaurante.toJson());
+                                        writer.close();
+                                        res = restaurante.cadastroRestaurante(request);
+                                        writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/restaurantes", true)));
+                                        writer.println(res.toJson());
+                                        obj.put("status", 1);
+                                        obj.put("message", "Cadastro efetuado com sucesso");
                                     } catch (Exception e) {
                                         obj.put("status", 0);
                                         obj.put("type", e.getClass());
                                         obj.put("stackTrace", e.getStackTrace());
                                         obj.put("message", e.getMessage());
                                     } finally {
-                                        reader.close();
-                                    }
-                                    Query query = request.getQuery();
-                                    Boolean achouUsuario = false;
-                                    Boolean senhaCorreta = false;
-                                    for (int i = 0; i < listUsuario.size(); i++) {
-                                        if (listUsuario.get(i).getEmail().equals(query.get("email"))) {
-                                            achouUsuario = true;
-                                            if (listUsuario.get(i).getSenha().equals(query.get("senha"))) {
-                                                senhaCorreta = true;
-                                                user = listUsuario.get(i);
-                                            }
-                                        }
-                                    }
-                                    if (achouUsuario) {
-                                        if (senhaCorreta) {
-                                            obj.put("status", 1);
-                                            obj.put("message", "Login efetuado com sucesso");
-                                            obj.put("usuario", user.toJson());
-                                        } else {
-                                            obj.put("status", 0);
-                                            obj.put("message", "Senha incorreta");
-                                        }
-                                    } else {
-                                        obj.put("status", -1);
-                                        obj.put("message", "Usuário não encontrado");
-                                    }
-                                    listUsuario = new ArrayList<>();
-                                    this.enviaResposta(Status.CREATED, response, obj.toString());
-                                }else{
-                                    //cadastro Usuario restaurante
-                                    if (path.startsWith("/cadastroUsuarioRestaurante")){
-
+                                        if (writer != null)
+                                            writer.close();
+                                        this.enviaResposta(Status.CREATED, response, obj.toString());
                                     }
                                 }
                             }
@@ -261,7 +254,7 @@ public class URLMetodo implements Container {
         body.close();
     }
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         int porta = 7200;
 
