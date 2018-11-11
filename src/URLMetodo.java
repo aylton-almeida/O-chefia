@@ -183,6 +183,57 @@ public class URLMetodo implements Container {
                                     obj.put("message", e.getMessage());
                                 }
                                 this.enviaResposta(Status.CREATED, response, obj.toString());
+                            }else{
+                                //Login Usuario restaurante
+                                if (path.startsWith("/loginUsuarioRestaurante")){
+                                    JSONObject obj = new JSONObject();
+                                    try {
+                                        reader = new BufferedReader(new FileReader("arquivos/usuariosRestaurante"));
+                                        String line;
+                                        while ((line = reader.readLine()) != null) {
+                                            listUsuario.add(mapper.readValue(line, Usuario.class));
+                                        }
+                                    } catch (Exception e) {
+                                        obj.put("status", 0);
+                                        obj.put("type", e.getClass());
+                                        obj.put("stackTrace", e.getStackTrace());
+                                        obj.put("message", e.getMessage());
+                                    } finally {
+                                        reader.close();
+                                    }
+                                    Query query = request.getQuery();
+                                    Boolean achouUsuario = false;
+                                    Boolean senhaCorreta = false;
+                                    for (int i = 0; i < listUsuario.size(); i++) {
+                                        if (listUsuario.get(i).getEmail().equals(query.get("email"))) {
+                                            achouUsuario = true;
+                                            if (listUsuario.get(i).getSenha().equals(query.get("senha"))) {
+                                                senhaCorreta = true;
+                                                user = listUsuario.get(i);
+                                            }
+                                        }
+                                    }
+                                    if (achouUsuario) {
+                                        if (senhaCorreta) {
+                                            obj.put("status", 1);
+                                            obj.put("message", "Login efetuado com sucesso");
+                                            obj.put("usuario", user.toJson());
+                                        } else {
+                                            obj.put("status", 0);
+                                            obj.put("message", "Senha incorreta");
+                                        }
+                                    } else {
+                                        obj.put("status", -1);
+                                        obj.put("message", "Usuário não encontrado");
+                                    }
+                                    listUsuario = new ArrayList<>();
+                                    this.enviaResposta(Status.CREATED, response, obj.toString());
+                                }else{
+                                    //cadastro Usuario restaurante
+                                    if (path.startsWith("/cadastroUsuarioRestaurante")){
+
+                                    }
+                                }
                             }
                         }
                     }
