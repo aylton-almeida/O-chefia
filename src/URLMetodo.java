@@ -48,17 +48,17 @@ public class URLMetodo implements Container {
                         listRestaurante.add(mapper.readValue(line, Restaurante.class));
                     }
                     reader.close();
+
                     File file = new File("arquivos/restaurantes");
                     file.delete();
                     writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/restaurantes")));
                     Query query = request.getQuery();
                     Boolean achouRestaurante = false;
-                    for (int i = 0; i < listRestaurante.size(); i++) {
+                    for (int i = 0; i < listRestaurante.size() && !achouRestaurante; i++) {
                         if (listRestaurante.get(i).getNome().equals(query.get("nomeRestaurante"))) {
                             achouRestaurante = true;
                             obj.put("status", 1);
                             obj.put("message", restaurante.addPratoCardapio(request, listRestaurante.get(i)));
-                            for (Restaurante r : listRestaurante) writer.println(r.toJson());
                         }
                     }
                     if (!achouRestaurante) {
@@ -71,6 +71,7 @@ public class URLMetodo implements Container {
                     obj.put("stackTrace", e.getStackTrace());
                     obj.put("message", e.getMessage());
                 } finally {
+                    for (Restaurante r : listRestaurante) writer.println(r.toJson());
                     if (writer != null)
                         writer.close();
                     if (reader != null)
@@ -108,7 +109,8 @@ public class URLMetodo implements Container {
                         obj.put("stackTrace", e.getStackTrace());
                         obj.put("message", e.getMessage());
                     } finally {
-                        reader.close();
+                        if (reader != null)
+                            reader.close();
                         this.enviaResposta(Status.CREATED, response, obj.toString());
                     }
                 } else {

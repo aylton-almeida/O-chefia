@@ -17,7 +17,8 @@ public class Endereco implements JsonFormatter {
         setUf(uf);
     }
 
-    public Endereco () {}
+    public Endereco() {
+    }
 
     public int getNumero() {
         return numero;
@@ -32,10 +33,7 @@ public class Endereco implements JsonFormatter {
     }
 
     public void setRua(String rua) {
-        if (rua.startsWith("rua"))
-            this.rua = rua.substring(0, 1).toUpperCase() + rua.substring(1).toLowerCase();
-        else
-            this.rua = "Rua " + rua.substring(0, 1).toUpperCase() + rua.substring(1).toLowerCase();
+        this.rua = rua.substring(0, 1).toUpperCase() + rua.substring(1).toLowerCase();
     }
 
     public String getBairro() {
