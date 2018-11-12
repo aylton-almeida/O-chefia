@@ -1,4 +1,6 @@
-public class Item {
+import org.json.JSONObject;
+
+public class Item implements JsonFormatter{
 
 	private int quantidade;
 	private Prato prato;
@@ -37,5 +39,14 @@ public class Item {
 	public void setDesconto(float desconto) {
 		this.desconto = desconto;
 	}
-	
+
+	@Override
+	public JSONObject toJson(){
+		JSONObject obj = new JSONObject();
+		obj.put("quantidade", this.quantidade);
+		obj.put("preco", this.preco);
+		obj.put("desconto", this.desconto);
+		obj.put("prato", this.prato.toJson());
+		return obj;
+	}
 }

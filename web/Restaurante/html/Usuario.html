@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="../imgs/logo.png" sizes="32X32">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <title>Ô Chefia</title>
+</head>
+
+<body>
+  <!-- NavBar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="../imgs/logo.png" class="img-fluid" width="50" height="50" alt="Logo"> Ô Chefia</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="../index.html">Pedidos <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./html/prato.html">Pratos</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="./Usuario.html">Cadastro de Usuario
+            <span class="sr-only">(current)</a>
+        </li>
+      </ul>
+  </nav>
+
+  <!-- Msg warning -->
+  <div id="msg">
+  </div>
+
+  <div class="container my-4">
+    <div class="col-xs-2 col-center-block">
+      <h5 class="modal-title" id="modalCadastroPratos">Cadastro de Usuario</h5>
+      </button>
+      <form id="cadastrarPratoForm" name="cadastrarPratoForm" enctype="multipart/form-data">
+        <div class="row">
+          <div class="form-group col">
+            <label for="nomeInput">Nome</label>
+            <input type="text" class="form-control" name="nome" id="nomeInput" placeholder="Nome" required>
+          </div>
+          <div class="form-group col">
+            <label for="emailInput">E-mail</label>
+            <input type="email" class="form-control" name="E-mail" id="emailInput" placeholder="E-mail" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="senhaInput">Senha</label>
+            <input type="password" class="form-control" name="senha" id="senhaInput" placeholder="Senha" required>
+          </div>
+          <div class="form-group col">
+            <label for="senhaInput">Confirmação Senha</label>
+            <input type="password" class="form-control" name="senha" id="confSenhaInput" placeholder="Senha" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="nomeRestauranteInput">Nome do Restaurante</label>
+            <input type="text" class="form-control" name="nomeRestuarante" id="nomeRestauranteInput" placeholder="Nome do Restaurante" required>
+          </div>
+          <div class="form-group col">
+            <label for="CNPJ">CNPJ</label>
+            <input type="number" class="form-control" name="cnpj" id="cnpjInput" placeholder="CNPJ" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="numMesasInput">Número de mesas</label>
+            <input type="number" class="form-control" name="numMesas" id="numMesasInput" placeholder="Número de mesas" required>
+          </div>
+          <div class="form-group col">
+            <label for="telefoneInput">Telefone</label>
+            <input type="text" class="form-control" name="telefone" id="telefoneInput" placeholder="Telefone" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="ruaInput">Rua</label>
+            <input type="text" class="form-control" name="rua" id="ruaInput" placeholder="Rua" required>
+          </div>
+          <div class="form-group col">
+            <label for="numeroInput">Número</label>
+            <input type="number" class="form-control" name="numero" id="numeroInput" placeholder="Número" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="bairroInput">Bairro</label>
+            <input type="text" class="form-control" name="bairro" id="bairroInput" placeholder="Bairro" required>
+          </div>
+          <div class="form-group col">
+            <label for="cepInput">CEP</label>
+            <input type="number" class="form-control" name="cep" id="cepInput" placeholder="CEP" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="cidadeInput">Cidade</label>
+            <input type="text" class="form-control" name="cidade" id="cidadeInput" placeholder="Cidade" required>
+          </div>
+          <div class="form-group col">
+            <label for="ufInput">Estado</label>
+            <input type="text" class="form-control" name="uf" id="ufInput" placeholder="Estado" required>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btnSubmitUsuario">Concluir</button>
+        <a href="../index.html">
+          <button type="button" class="btn btn-danger" id="btnCancelarUsuario">Cancelar</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="../js/usuario.js"></script>
+  <script type="text/javascript" src="../js/default.js"></script>
+</body>
+
+</html>

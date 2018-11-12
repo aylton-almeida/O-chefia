@@ -1,5 +1,8 @@
 
+import java.lang.reflect.Array;
 import java.util.*;
+
+import com.google.gson.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,21 +12,23 @@ public class Restaurante implements JsonFormatter {
     private String cnpj;
     private Endereco endereco;
     private int numMesas;
+    private String telefone;
     private List<Prato> cardapio;
-    private Dictionary comentarios;
-    private Stack historicoDePedidos;
+    private List<Pedido> historicoDePedidos;
     private Queue<Pedido> pedidosAbertos;
 
-    public Restaurante(String nome, String cnpj, Endereco endereco, int numMesas) throws ExceptionRestaurante {
+    public Restaurante(String nome, String cnpj, Endereco endereco, int numMesas, String telefone) throws ExceptionRestaurante {
         setNome(nome);
         setCnpj(cnpj);
         setEndereco(endereco);
         setNumMesas(numMesas);
         setCardapio(new ArrayList());
-        setComentarios(new Hashtable());
         setPedidosAbertos(new ArrayDeque());
-        setHistoricoDePedidos(new Stack());
+        setHistoricoDePedidos(new ArrayList<>());
+        setTelefone(telefone);
     }
+
+    public Restaurante(){}
 
     //Pegar nome restaurante
     public String getNome() {
@@ -95,24 +100,6 @@ public class Restaurante implements JsonFormatter {
             throw new ExceptionRestaurante("Prato invalido");
     }
 
-    //Pegar comentarios
-    public Dictionary getComentarios() {
-        return comentarios;
-    }
-
-    //Colocar comentarios
-    private void setComentarios(Dictionary comentarios) {
-        this.comentarios = comentarios;
-    }
-
-    //Adicionar comentario a lista
-    public void addComentario(Comentario comentario) throws ExceptionRestaurante {
-        if (comentario != null)
-            this.comentarios.put(comentarios.size() + 1, comentario);
-        else
-            throw new ExceptionRestaurante("Comentario invalido");
-    }
-
     //Colocar pedidos abertos
     private void setPedidosAbertos(Queue pedidosAbertos) {
         this.pedidosAbertos = pedidosAbertos;
@@ -134,16 +121,16 @@ public class Restaurante implements JsonFormatter {
     //Fechar primeiro pedido e adiciona-lo ao historico de pedido
     public Pedido fechaPrimeiroPedido() {
         historicoDePedidos.add(pedidosAbertos.peek());
-        return (Pedido) pedidosAbertos.remove();
+        return pedidosAbertos.remove();
     }
 
     //Pegar historio de pedido
-    public Stack getHistoricoDePedidos() {
+    public List<Pedido> getHistoricoDePedidos() {
         return historicoDePedidos;
     }
 
     //Colocar historico de pedido
-    private void setHistoricoDePedidos(Stack historicoDePedidos) {
+    private void setHistoricoDePedidos(List<Pedido> historicoDePedidos) {
         this.historicoDePedidos = historicoDePedidos;
     }
 
@@ -156,44 +143,43 @@ public class Restaurante implements JsonFormatter {
         return array;
     }
 
-    //Conveter os commentarios em um vetor JSON
-    public JSONArray comentariosToJsonArray() {
+    //Conveter o historico de pedidos em um vetor JSON
+    public JSONArray historicoToJsonArray() {
         JSONArray array = new JSONArray();
-        for (int i = 1; i < comentarios.size(); i++) {
-            array.put(((Comentario)comentarios.get(i)).toJson());
+        for (int i = 0; i < historicoDePedidos.size(); i++) {
+            array.put(historicoDePedidos.get(i).toJson());
         }
         return array;
     }
 
-//    //Conveter o historico de pedidos em um vetor JSON
-//    public JSONArray historicoToJsonArray() {
-//        JSONArray array = new JSONArray();
-//        for (int i = 1; i < historicoDePedidos.size(); i++) {
-//            List<Pedido> list = new ArrayList;
-//            list.add((Pedido)historicoDePedidos.peek());
-//            array.put(historicoDePedidos.);
-//        }
-//        return array;
-//    }
-//
+    public JSONArray pedidosAbertoToJsonArray(){
+        JSONArray array = new JSONArray();
+        for (int i = 0; i < pedidosAbertos.size();i++){
+            array.put(pedidosAbertos.peek().toJson());
+            pedidosAbertos.add(pedidosAbertos.remove());
+        }
+        return array;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
         obj.put("nome", this.nome);
         obj.put("cnpj", this.cnpj);
-        obj.put("endereco", this.endereco);
+        obj.put("endereco", this.endereco.toJson());
         obj.put("numMesas", this.numMesas);
+        obj.put("telefone", this.telefone);
         obj.put("cardapio", this.cardapioToJsonArray());
-        obj.put("comentarios", this.comentariosToJsonArray());
-        //obj.put("historicoDePedidos", this.);
+        obj.put("historicoDePedidos", this.historicoToJsonArray());
+        obj.put("pedidosAbertos", pedidosAbertoToJsonArray());
         return obj;
     }
 
-//    private String nome, cnpj;
-//    private Endereco endereco;
-//    private int numMesas;
-//    private List<Prato> cardapio;
-//    private Dictionary comentarios;
-//    private Stack historicoDePedidos;
-//    private Queue<Pedido> pedidosAbertos;
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 }

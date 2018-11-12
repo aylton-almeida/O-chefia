@@ -8,7 +8,7 @@ $('#btnCancelarModal').click(() => {
 //Cadastrar Pratos
 $('#btnSubmitPrato').click(() => {
   if ($("#cadastrarPratoForm")[0].checkValidity()) {
-
+    let tipo = document.getElementsByClassName('tipo').value;
     //AJAX
     $.ajax({
       url: 'http://127.0.0.1:7200/cadastrarPratos',
@@ -16,7 +16,9 @@ $('#btnSubmitPrato').click(() => {
       data: ({
         nome: $('#nomeInput').val(),
         preco: $('#precoInput').val(),
-        ingredientes: $('#ingredientesInput').val()
+        ingredientes: $('#ingredientesInput').val(),
+        tipo: $("input[name=tipo]:checked").val(),
+        nomeRestaurante: user.restaurante.nome
       }),
       success: function(response) {
         if (response.status == 1) {
@@ -48,6 +50,9 @@ $("document").ready(() => {
   $.ajax({
     url: 'http://127.0.0.1:7200/recuperarPratos',
     type: "POST",
+    data: ({
+      nomeRestaurante: user.restaurante.nome
+    }),
     success: function(response) {
       if (response.status == 1) {
         response.obj.forEach((element) => {

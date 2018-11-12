@@ -1,8 +1,8 @@
 public class Comida extends Prato {
     private String ingredientes;
 
-    public Comida(String nome, float preco, String ingredientes) throws ExceptionPrato{
-        super(nome, preco, ingredientes);
+    public Comida(String nome, float preco, String ingredientes, int tipo) throws ExceptionPrato{
+        super(nome, preco, ingredientes, tipo);
         setIngredientes(ingredientes);
     }
 
