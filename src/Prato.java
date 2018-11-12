@@ -1,6 +1,11 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 
-public class Prato implements JsonFormatter {
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Prato implements JsonFormatter, ModelObject, DAOInterface {
     private String nome;
     private String ingredientes;
     private double preco;
@@ -16,7 +21,7 @@ public class Prato implements JsonFormatter {
     }
 
     //Construtor vazio
-    public Prato() throws ExceptionPrato{
+    public Prato() throws ExceptionPrato {
         setNome("Comida");
         setPreco(0.1);
         setIngredientes("");
@@ -73,5 +78,28 @@ public class Prato implements JsonFormatter {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public List<Prato> getAllObjects(Restaurante restaurante) throws Exception{
+        return restaurante.getCardapio();
+    }
+
+    @Override
+    public ModelObject getObject(Object key) throws Exception{
+        List<ModelObject> list = this.getAllObjects();
+        for (ModelObject l : list)
+            if (((Prato) l).getNome().equals(key))
+                return l;
+        return null;
+    }
+
+    public void addObject(Prato p, Restaurante r) throws Exception {
+        r.addPratoCardapio(p);
+        this.addObject(r);
+    }
+
+    @Override
+    public void addObject(ModelObject o) throws Exception{
+        new Restaurante().updateObject(o);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -23,9 +24,11 @@ public class URLMetodo implements Container {
     //Dados estaticos
     private static RestauranteService restaurante = new RestauranteService();
     private static UsuarioService usuario = new UsuarioService();
+    private static PratoService prato = new PratoService();
     private static List<Usuario> listUsuario = new ArrayList<>();
     private static List<Restaurante> listRestaurante = new ArrayList<>();
-    private static Usuario user, userRestaurante;
+    private static Usuario user;
+    private static UsuarioRestaurante userRestaurante;
     private static Restaurante res;
     private static PrintWriter writer = null;
     private static BufferedReader reader = null;
@@ -39,141 +42,27 @@ public class URLMetodo implements Container {
 
             // Verifica qual ação está sendo chamada
 
-            //Cadastro de pratos
             if (path.startsWith("/cadastrarPratos")) {
-                JSONObject obj = new JSONObject();
-                try {
-                    reader = new BufferedReader(new FileReader("arquivos/restaurantes"));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        listRestaurante.add(mapper.readValue(line, Restaurante.class));
-                    }
-                    reader.close();
-                    writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/restaurantes")));
-                    Query query = request.getQuery();
-                    Boolean achouRestaurante = false;
-                    for (int i = 0; i < listRestaurante.size() && !achouRestaurante; i++) {
-                        if (listRestaurante.get(i).getNome().equals(query.get("nomeRestaurante"))) {
-                            achouRestaurante = true;
-                            obj.put("status", 1);
-                            obj.put("message", restaurante.addPratoCardapio(request, listRestaurante.get(i)));
-                        }
-                    }
-                    for (Restaurante r : listRestaurante) writer.println(r.toJson());
-                    if (!achouRestaurante) {
-                        obj.put("status", -1);
-                        obj.put("message", "Restaurante não encontrado");
-                    }
-                } catch (Exception e) {
-                    obj.put("status", 0);
-                    obj.put("type", e.getClass());
-                    obj.put("stackTrace", e.getStackTrace());
-                    obj.put("message", e.getMessage());
-                } finally {
-                    if (writer != null)
-                        writer.close();
-                    if (reader != null)
-                        reader.close();
-                    listRestaurante = new ArrayList<>();
-                    this.enviaResposta(Status.CREATED, response, obj.toString());
-                }
+                //Cadastro de pratos
+                JSONObject obj = prato.cadastrarPrato(request, userRestaurante);
+                this.enviaResposta(Status.CREATED, response, obj.toString());
             } else {
-                //Recuperação de pratos
                 if (path.startsWith("/recuperarPratos")) {
-                    JSONObject obj = new JSONObject();
-                    try {
-                        reader = new BufferedReader(new FileReader("arquivos/restaurantes"));
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            listRestaurante.add(mapper.readValue(line, Restaurante.class));
-                        }
-                        Query query = request.getQuery();
-                        boolean achou = false;
-                        for (Restaurante aListRestaurante : listRestaurante) {
-                            if (aListRestaurante.getNome().equals(query.get("nomeRestaurante"))) {
-                                achou = true;
-                                obj.put("status", 1);
-                                obj.put("message", "Pratos recuperados");
-                                obj.put("obj", aListRestaurante.cardapioToJsonArray());
-                            }
-                        }
-                        if (!achou) {
-                            obj.put("status", 1);
-                            obj.put("message", "Restaurante não encontrado");
-                        }
-                    } catch (Exception e) {
-                        obj.put("status", 0);
-                        obj.put("type", e.getClass());
-                        obj.put("stackTrace", e.getStackTrace());
-                        obj.put("message", e.getMessage());
-                    } finally {
-                        if (reader != null)
-                            reader.close();
-                        this.enviaResposta(Status.CREATED, response, obj.toString());
-                    }
+                    //Recuperação de pratos
+                    JSONObject obj = prato.recuperarPratos(userRestaurante);
+                    this.enviaResposta(Status.CREATED, response, obj.toString());
                 } else {
                     //Cadastro de usuários
                     if (path.startsWith("/cadastrarUsuario")) {
-                        JSONObject obj = new JSONObject();
-                        try {
-                            user = usuario.cadastroUsuario(request);
-                            writer = new PrintWriter(new BufferedWriter(new FileWriter("arquivos/usuarios", true)));
-                            writer.println(user.toJson());
-                            obj.put("status", 1);
-                            obj.put("message", "Cadastro efetuado com sucesso");
-                        } catch (Exception e) {
-                            obj.put("status", 0);
-                            obj.put("type", e.getClass());
-                            obj.put("stackTrace", e.getStackTrace());
-                            obj.put("message", e.getMessage());
-                        } finally {
-                            writer.close();
-                            this.enviaResposta(Status.CREATED, response, obj.toString());
-                        }
+                        JSONObject obj = usuario.cadastroUsuario(request);
+                        user = mapper.readValue((String)obj.get("user"), Usuario.class);
+                        this.enviaResposta(Status.CREATED, response, obj.toString());
                     } else {
                         //Login do usuario
                         if (path.startsWith("/loginUsuario")) {
                             JSONObject obj = new JSONObject();
-                            try {
-                                reader = new BufferedReader(new FileReader("arquivos/usuarios"));
-                                String line;
-                                while ((line = reader.readLine()) != null) {
-                                    listUsuario.add(mapper.readValue(line, Usuario.class));
-                                }
-                            } catch (Exception e) {
-                                obj.put("status", 0);
-                                obj.put("type", e.getClass());
-                                obj.put("stackTrace", e.getStackTrace());
-                                obj.put("message", e.getMessage());
-                            } finally {
-                                reader.close();
-                            }
-                            Query query = request.getQuery();
-                            boolean achouUsuario = false;
-                            boolean senhaCorreta = false;
-                            for (Usuario aListUsuario : listUsuario) {
-                                if (aListUsuario.getEmail().equals(query.get("email"))) {
-                                    achouUsuario = true;
-                                    if (aListUsuario.getSenha().equals(query.get("senha"))) {
-                                        senhaCorreta = true;
-                                        user = aListUsuario;
-                                    }
-                                }
-                            }
-                            if (achouUsuario) {
-                                if (senhaCorreta) {
-                                    obj.put("status", 1);
-                                    obj.put("message", "Login efetuado com sucesso");
-                                    obj.put("usuario", user.toJson());
-                                } else {
-                                    obj.put("status", 0);
-                                    obj.put("message", "Senha incorreta");
-                                }
-                            } else {
-                                obj.put("status", -1);
-                                obj.put("message", "Usuário não encontrado");
-                            }
-                            listUsuario = new ArrayList<>();
+                            obj = usuario.loginUsuario(request);
+                            user = mapper.readValue((String)obj.get("user"), Usuario.class);
                             this.enviaResposta(Status.CREATED, response, obj.toString());
                         } else {
                             //Recupera restaurantes
