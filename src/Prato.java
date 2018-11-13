@@ -1,8 +1,4 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
-
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Prato implements JsonFormatter, ModelObject, DAOInterface {
@@ -80,12 +76,12 @@ public class Prato implements JsonFormatter, ModelObject, DAOInterface {
         this.tipo = tipo;
     }
 
-    public List<Prato> getAllObjects(Restaurante restaurante) throws Exception{
+    public List<Prato> getAllObjects(Restaurante restaurante) throws Exception {
         return restaurante.getCardapio();
     }
 
     @Override
-    public ModelObject getObject(Object key) throws Exception{
+    public ModelObject getObject(Object key) throws Exception {
         List<ModelObject> list = this.getAllObjects();
         for (ModelObject l : list)
             if (((Prato) l).getNome().equals(key))
@@ -99,7 +95,7 @@ public class Prato implements JsonFormatter, ModelObject, DAOInterface {
     }
 
     @Override
-    public void addObject(ModelObject o) throws Exception{
+    public void addObject(ModelObject o) throws Exception {
         new Restaurante().updateObject(o);
     }
 }

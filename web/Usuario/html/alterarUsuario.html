@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="../imgs/logo.png" sizes="32X32">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <title>Ô Chefia</title>
+</head>
+
+<body>
+  <!-- NavBar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="../imgs/logo.png" class="img-fluid" width="50" height="50" alt="Logo"> Ô Chefia</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Restaurantes</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="./Usuario.html">Alteração de Usuario
+            <span class="sr-only">(current)</a>
+        </li>
+      </ul>
+  </nav>
+
+  <!-- Msg warning -->
+  <div id="msg">
+  </div>
+
+  <div class="container my-4">
+    <div class="col-xs-2 col-center-block">
+      <h5 class="modal-title" id="modalCadastroPratos">Alterar Usuario</h5>
+      </button>
+      <form id="alterarUsuarioForm" name="cadastrarPratoForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="nomeInput">Nome</label>
+          <input type="text" class="form-control" name="nome" id="nomeInput" placeholder="Nome" required>
+        </div>
+        <div class="form-group">
+          <label for="senhaInput">Senha Atual</label>
+          <input type="password" class="form-control" name="senha" id="senhaInput" placeholder="Senha atual" required>
+        </div>
+        <div class="form-group">
+          <label for="senhaInput">Nova senha</label>
+          <input type="password" class="form-control" name="senha" id="novaSenhaInput" placeholder="Nova senha" required>
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input type="number" class="form-control" name="cpf" id="cpfInput" placeholder="CPF" required>
+        </div>
+        <div class="form-group">
+          <label for="telefoneInput">Telefone</label>
+          <input type="number" class="form-control" name="telefone" id="telefoneInput" placeholder="Telefone" required>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btnSubmitUsuario">Concluir</button>
+        <a href="../index.html">
+          <button type="button" class="btn btn-secondary" id="btnCancelarUsuario">Cancelar</button>
+        </a>
+        <button type="button" class="btn btn-warning" id="btnSairUsuario">Sair</button>
+        <button type="button" class="btn btn-danger" id="btnDeletar">Deletar conta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="../js/default.js"></script>
+  <script type="text/javascript" src="../js/alterarUsuario.js"></script>
+</body>
+
+</html>

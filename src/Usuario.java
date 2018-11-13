@@ -92,7 +92,7 @@ public class Usuario implements JsonFormatter, ModelObject, DAOInterface {
 
     //Altera a senha quando a senha atual passada for igual a senha do usuario
     public void alteraSenha(String senhaNova, String senhaAtual) throws ExceptionUsuario {
-        if (senhaAtual == this.senha)
+        if (senhaAtual.equals(this.senha))
             setSenha(senhaNova);
         else
             throw new ExceptionUsuario("Senha atual invalida");
@@ -112,7 +112,7 @@ public class Usuario implements JsonFormatter, ModelObject, DAOInterface {
     @Override
     public List<ModelObject> getAllObjects() throws Exception {
         List<ModelObject> list = new ArrayList<>();
-        BufferedReader reader = null;
+        BufferedReader reader;
         String line;
         ObjectMapper mapper = new ObjectMapper();
         reader = new BufferedReader(new FileReader("arquivos/usuarios"));
@@ -149,7 +149,7 @@ public class Usuario implements JsonFormatter, ModelObject, DAOInterface {
 
     @Override
     public void updateObject(ModelObject o) throws Exception {
-        PrintWriter writer = null;
+        PrintWriter writer;
         List<ModelObject> list = this.getAllObjects();
         for (int i = 0; i < list.size(); i++) {
             if (((Usuario) list.get(i)).getEmail().equals(((Usuario) o).getEmail())) {

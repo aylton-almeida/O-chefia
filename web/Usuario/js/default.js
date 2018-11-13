@@ -21,7 +21,14 @@ var msg = JSON.parse(sessionStorage.getItem('mensagem'));
 if (user != null && user.status) {
   $('#formLogin').hide();
   $('#bemVindo').show();
-  $('#bemVindo').html("Bem vindo, " + user.nome);
+  $('#aBemVindo').html("Bem vindo, " + user.nome);
+  $('#aBemVindo')
+  .mouseenter(()=>{
+    $('#aBemVindo').html('Editar');
+  })
+  .mouseleave(()=>{
+    $('#aBemVindo').html("Bem vindo, " + user.nome);
+  })
 } else {
   $('#formLogin').show();
   $('#bemVindo').hide();
