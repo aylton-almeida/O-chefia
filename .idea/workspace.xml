@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24d8666a-69a6-474d-9639-7db14a06d415" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/UsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/Comida.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/Prato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/Prato.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/URLMetodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/URLMetodo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/UsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/UsuarioService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Comida.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Prato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Prato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/URLMetodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/URLMetodo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/Usuario/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/Usuario/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/Usuario/js/default.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/Usuario/js/default.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testes/UsuarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Testes/UsuarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arquivos/usuarios" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,29 +16,30 @@
     <session id="1601568689">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="5" />
+          <entry key="java" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="5" />
+          <entry key="JAVA" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1136" />
+          <entry key="java" value="1941" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1136" />
+          <entry key="JAVA" value="1941" />
         </counts>
       </usages-collector>
     </session>
@@ -87,25 +77,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/URLMetodo.java">
+        <entry file="file://$PROJECT_DIR$/Testes/UsuarioTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="77" column="53" selection-start-line="77" selection-start-column="53" selection-end-line="77" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Services/UsuarioService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
-              <folding>
-                <element signature="method#cadastroUsuario#0;class#UsuarioService#0" />
-                <element signature="method#loginUsuario#0;class#UsuarioService#0" />
-                <element signature="method#alteraUsuario#0;class#UsuarioService#0" />
-                <element signature="method#deletarUsuario#0;class#UsuarioService#0" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -113,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Usuario.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-453">
-              <caret line="135" column="53" lean-forward="true" selection-start-line="135" selection-start-column="53" selection-end-line="135" selection-end-column="53" />
+            <state relative-caret-position="-23">
+              <caret line="118" column="12" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -152,6 +127,7 @@
         <option value="$PROJECT_DIR$/src/Usuario.java" />
         <option value="$PROJECT_DIR$/Services/UsuarioService.java" />
         <option value="$PROJECT_DIR$/src/URLMetodo.java" />
+        <option value="$PROJECT_DIR$/Testes/UsuarioTest.java" />
       </list>
     </option>
   </component>
@@ -172,9 +148,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,10 +172,16 @@
               <item name="O-chefia" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="O-chefia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="O-chefia" type="462c0819:PsiDirectoryNode" />
+              <item name="Testes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -209,7 +190,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542071624662" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542073908076" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Libraries/Simple Java" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -227,7 +208,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.UsuarioTest.getAllObjects">
     <configuration name="URLMetodo" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="URLMetodo" />
       <module name="O-chefia" />
@@ -235,6 +216,71 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UsuarioTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="O-chefia" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsuarioTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioTest.addObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="O-chefia" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsuarioTest" />
+      <option name="METHOD_NAME" value="addObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioTest.deleteObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="O-chefia" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsuarioTest" />
+      <option name="METHOD_NAME" value="deleteObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioTest.getAllObjects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="O-chefia" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsuarioTest" />
+      <option name="METHOD_NAME" value="getAllObjects" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuarioTest.updateObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="O-chefia" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsuarioTest" />
+      <option name="METHOD_NAME" value="updateObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.URLMetodo" />
+      <item itemvalue="JUnit.UsuarioTest.getAllObjects" />
+      <item itemvalue="JUnit.UsuarioTest.addObject" />
+      <item itemvalue="JUnit.UsuarioTest.deleteObject" />
+      <item itemvalue="JUnit.UsuarioTest.updateObject" />
+      <item itemvalue="JUnit.UsuarioTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UsuarioTest.getAllObjects" />
+        <item itemvalue="JUnit.UsuarioTest" />
+        <item itemvalue="JUnit.UsuarioTest.updateObject" />
+        <item itemvalue="JUnit.UsuarioTest.deleteObject" />
+        <item itemvalue="JUnit.UsuarioTest.addObject" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -247,11 +293,44 @@
       <option name="presentableId" value="Default" />
       <updated>1540788738966</updated>
       <workItem from="1540788743306" duration="173000" />
+      <workItem from="1542072201249" duration="1721000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="UsuarioTest_getAllObjects - 2018.11.12 at 23h 42m 26s.xml">
+      <configuration name="UsuarioTest.getAllObjects" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_addObject - 2018.11.12 at 23h 46m 16s.xml">
+      <configuration name="UsuarioTest.addObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_addObject - 2018.11.12 at 23h 46m 37s.xml">
+      <configuration name="UsuarioTest.addObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_getAllObjects - 2018.11.12 at 23h 46m 41s.xml">
+      <configuration name="UsuarioTest.getAllObjects" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_deleteObject - 2018.11.12 at 23h 47m 57s.xml">
+      <configuration name="UsuarioTest.deleteObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_updateObject - 2018.11.12 at 23h 50m 04s.xml">
+      <configuration name="UsuarioTest.updateObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_updateObject - 2018.11.12 at 23h 50m 25s.xml">
+      <configuration name="UsuarioTest.updateObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest - 2018.11.12 at 23h 50m 51s.xml">
+      <configuration name="UsuarioTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_getAllObjects - 2018.11.12 at 23h 51m 25s.xml">
+      <configuration name="UsuarioTest.getAllObjects" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UsuarioTest_getAllObjects - 2018.11.12 at 23h 51m 43s.xml">
+      <configuration name="UsuarioTest.getAllObjects" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9990000" />
+    <option name="totallyTimeSpent" value="11711000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="382" y="236" width="960" height="771" extended-state="0" />
@@ -342,13 +421,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Comida.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Comida.java" />
     <entry file="file://$PROJECT_DIR$/src/Prato.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -380,30 +453,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Usuario.java">
+    <entry file="file://$PROJECT_DIR$/src/URLMetodo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-453">
-          <caret line="135" column="53" lean-forward="true" selection-start-line="135" selection-start-column="53" selection-end-line="135" selection-end-column="53" />
+        <state relative-caret-position="459">
+          <caret line="77" column="53" selection-start-line="77" selection-start-column="53" selection-end-line="77" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Services/UsuarioService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
+        <state relative-caret-position="201">
           <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
           <folding>
             <element signature="method#cadastroUsuario#0;class#UsuarioService#0" />
             <element signature="method#loginUsuario#0;class#UsuarioService#0" />
             <element signature="method#alteraUsuario#0;class#UsuarioService#0" />
-            <element signature="method#deletarUsuario#0;class#UsuarioService#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/URLMetodo.java">
+    <entry file="file://$PROJECT_DIR$/src/Usuario.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="77" column="53" selection-start-line="77" selection-start-column="53" selection-end-line="77" selection-end-column="53" />
+        <state relative-caret-position="-23">
+          <caret line="118" column="12" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Testes/UsuarioTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
         </state>
       </provider>
     </entry>
