@@ -45,13 +45,13 @@ public class URLMetodo implements Container {
 
             if (path.startsWith("/cadastrarPratos")) {
                 //Cadastro de pratos
-                JSONObject obj = prato.cadastrarPrato(request, userRestaurante);
-                this.enviaResposta(Status.CREATED, response, obj.toString());
+                //JSONObject obj = prato.cadastrarPrato(request, userRestaurante);
+                //this.enviaResposta(Status.CREATED, response, obj.toString());
             } else {
                 if (path.startsWith("/recuperarPratos")) {
                     //Recuperação de pratos
-                    JSONObject obj = prato.recuperarPratos(userRestaurante);
-                    this.enviaResposta(Status.CREATED, response, obj.toString());
+                    //JSONObject obj = prato.recuperarPratos(userRestaurante);
+                    //this.enviaResposta(Status.CREATED, response, obj.toString());
                 } else {
                     //Cadastro de usuários
                     if (path.startsWith("/cadastrarUsuario")) {

@@ -1,7 +1,7 @@
 import org.json.JSONObject;
 import java.util.List;
 
-public class Prato implements JsonFormatter, ModelObject, DAOInterface {
+public class Prato implements JsonFormatter {
     private String nome;
     private String ingredientes;
     private double preco;
@@ -74,28 +74,5 @@ public class Prato implements JsonFormatter, ModelObject, DAOInterface {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
-    }
-
-    public List<Prato> getAllObjects(Restaurante restaurante) throws Exception {
-        return restaurante.getCardapio();
-    }
-
-    @Override
-    public ModelObject getObject(Object key) throws Exception {
-        List<ModelObject> list = this.getAllObjects();
-        for (ModelObject l : list)
-            if (((Prato) l).getNome().equals(key))
-                return l;
-        return null;
-    }
-
-    public void addObject(Prato p, Restaurante r) throws Exception {
-        r.addPratoCardapio(p);
-        this.addObject(r);
-    }
-
-    @Override
-    public void addObject(ModelObject o) throws Exception {
-        new Restaurante().updateObject(o);
     }
 }
