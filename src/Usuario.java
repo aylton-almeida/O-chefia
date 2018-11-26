@@ -29,6 +29,7 @@ public class Usuario implements JsonFormatter, ModelObject {
     }
 
     public Usuario() {
+
     }
 
     public String getNome() {

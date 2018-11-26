@@ -1,6 +1,6 @@
 import org.json.JSONObject;
 
-public class UsuarioRestaurante extends Usuario implements JsonFormatter{
+public class UsuarioRestaurante extends Usuario implements JsonFormatter, ModelObject{
     private Restaurante restaurante;
 
     public UsuarioRestaurante(Restaurante restaurante, Usuario usuario) throws ExceptionUsuario{

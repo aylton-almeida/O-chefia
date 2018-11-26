@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Testes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DAO" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

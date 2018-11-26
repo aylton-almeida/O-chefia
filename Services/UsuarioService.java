@@ -1,13 +1,9 @@
 import org.json.JSONObject;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
-import org.simpleframework.http.Status;
-
-import java.io.*;
-import java.util.ArrayList;
 
 public class UsuarioService {
-    private Usuarios usuarios;
+    private Usuarios usuarios = new Usuarios();
 
     //Cadastro de usuario
     public JSONObject cadastroUsuario(Request request) {
@@ -100,11 +96,5 @@ public class UsuarioService {
             obj.put("usuario", new Usuario().toJson());
         }
         return obj;
-    }
-
-    //Cadastro Usuario de restaurante
-    public UsuarioRestaurante cadastroUsuarioRestaurante(Request request) throws ExceptionRestaurante, ExceptionUsuario {
-        Query query = request.getQuery();
-        return new UsuarioRestaurante(new Restaurante(query.get("nome"), query.get("cnpj"), new Endereco(query.getInteger("numero"), query.get("rua"), query.get("bairro"), query.getInteger("cep"), query.get("cidade"), query.get("uf")), query.getInteger("numMesas"), query.get("telefone")), new Usuario(query.get("nomeUsuario"), query.get("senha"), query.get("email")));
     }
 }
