@@ -6,13 +6,14 @@ public class UsuarioRestauranteService {
     private UsuariosRestaurante usuariosRestaurante = new UsuariosRestaurante();
 
     //Cadastro Usuario de restaurante
-    public JSONObject cadastroUsuarioRestaurante(Request request) throws ExceptionRestaurante, ExceptionUsuario {
+    public JSONObject cadastroUsuarioRestaurante(Request request) {
         Query query = request.getQuery();
         JSONObject obj = new JSONObject();
         try{
         UsuarioRestaurante user = new UsuarioRestaurante(new Restaurante(query.get("nome"), query.get("cnpj"), new Endereco(query.getInteger("numero"), query.get("rua"), query.get("bairro"), query.getInteger("cep"), query.get("cidade"), query.get("uf")), query.getInteger("numMesas"), query.get("telefone")), new Usuario(query.get("nomeUsuario"), query.get("senha"), query.get("email")));
         usuariosRestaurante.addObject(user);
-        obj.put("user", user);
+        obj.put("usuarioRestaurante", user.getUsuario().toJson());
+        obj.put("restauranteUsuario", user.getRestaurante().toJson());
         }catch (Exception e){
             obj.put("status", 0);
             obj.put("message", e.getMessage());

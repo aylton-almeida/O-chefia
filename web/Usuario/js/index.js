@@ -9,6 +9,7 @@ $('#document').ready(() => {
         let restauranteArray = response.array;
         restauranteArray.forEach((element) => {
           //Gerar DOM objects
+          console.log(element);
           let divCard = document.createElement("div");
           divCard.className = "card bg-dark text-light m-3";
           let divHeader = document.createElement("div");

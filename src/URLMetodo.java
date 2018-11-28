@@ -25,7 +25,6 @@ public class URLMetodo implements Container {
     //Dados estaticos
     private static RestauranteService restaurante = new RestauranteService();
     private static UsuarioService usuario = new UsuarioService();
-    private static UsuarioRestauranteService usuarioRestaurante= new UsuarioRestauranteService();
     private static PratoService prato = new PratoService();
     private static Usuario user;
     private static UsuarioRestaurante userRestaurante;
@@ -73,20 +72,22 @@ public class URLMetodo implements Container {
                                 JSONObject obj = restaurante.recuperaRestaurantes();
                                 this.enviaResposta(Status.CREATED, response, obj.toString());
                             } else {
-                                //cadastro Usuario/restaurante
+                                //Cadastro Usuario/restaurante
                                 if (path.startsWith("/cadastrarRestauranteUsuario")) {
                                     JSONObject obj = restaurante.cadastrarRestaurante(request);
+                                    if (obj.get("usuarioRestaurante") != null && obj.get("restauranteUsuario") != null)
+                                        userRestaurante = new UsuarioRestaurante(mapper.readValue(obj.get("restauranteUsuario").toString(), Restaurante.class), mapper.readValue(obj.get("usuarioRestaurante").toString(), Usuario.class));
                                     this.enviaResposta(Status.CREATED, response, obj.toString());
                                 } else {
                                     if (path.startsWith("/cadastrarPratos")) {
                                         //Cadastro de pratos
-                                        //JSONObject obj = prato.cadastrarPrato(request, userRestaurante);
-                                        //this.enviaResposta(Status.CREATED, response, obj.toString());
+                                        JSONObject obj = prato.cadastrarPrato(request, userRestaurante.getRestaurante());
+                                        this.enviaResposta(Status.CREATED, response, obj.toString());
                                     } else {
                                         if (path.startsWith("/recuperarPratos")) {
                                             //Recuperação de pratos
-                                            //JSONObject obj = prato.recuperarPratos(userRestaurante);
-                                            //this.enviaResposta(Status.CREATED, response, obj.toString());
+                                            JSONObject obj = prato.recuperarPratos(userRestaurante);
+                                            this.enviaResposta(Status.CREATED, response, obj.toString());
                                         }
                                     }
                                 }

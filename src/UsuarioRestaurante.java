@@ -8,12 +8,19 @@ public class UsuarioRestaurante extends Usuario implements JsonFormatter, ModelO
         setRestaurante(restaurante);
     }
 
+    public UsuarioRestaurante(){
+    }
+
     public Restaurante getRestaurante() {
         return restaurante;
     }
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+    }
+
+    public Usuario getUsuario() throws Exception{
+        return new Usuario(super.getNome(), super.getSenha(), super.getEmail());
     }
 
     @Override
