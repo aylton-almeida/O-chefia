@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24d8666a-69a6-474d-9639-7db14a06d415" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/PratoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/PratoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/UsuarioRestauranteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/UsuarioRestauranteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arquivos/restaurantes" beforeDir="false" afterPath="$PROJECT_DIR$/arquivos/restaurantes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arquivos/usuariosRestaurantes" beforeDir="false" afterPath="$PROJECT_DIR$/arquivos/usuariosRestaurantes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/PratoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/PratoService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/URLMetodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/URLMetodo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/UsuarioRestaurante.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/UsuarioRestaurante.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/O-chefia/UsuarioRestauranteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/O-chefia/UsuarioRestauranteService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/URLMetodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/URLMetodo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UsuarioRestaurante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UsuarioRestaurante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/Restaurante/js/prato.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/Restaurante/js/prato.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/Usuario/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/Usuario/js/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="24d8666a-69a6-474d-9639-7db14a06d415" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +43,7 @@
     <session id="-1414591417">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.2" value="2" />
@@ -105,8 +91,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Services/PratoService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="27" column="64" lean-forward="true" selection-start-line="27" selection-start-column="64" selection-end-line="27" selection-end-column="64" />
+            <state relative-caret-position="405">
+              <caret line="27" column="64" selection-start-line="27" selection-start-column="64" selection-end-line="27" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/DAO/Restaurantes.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#deleteObject#0;class#Restaurantes#0" />
@@ -409,9 +395,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16221985" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16221985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -420,7 +405,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32864866" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32756758" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32756758" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -508,6 +493,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#deleteObject#0;class#UsuariosTest#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -538,6 +527,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="50" column="62" lean-forward="true" selection-start-line="50" selection-start-column="62" selection-end-line="50" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -606,7 +598,7 @@
     <entry file="file://$PROJECT_DIR$/DAO/Restaurantes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#deleteObject#0;class#Restaurantes#0" />
@@ -633,8 +625,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Services/PratoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="27" column="64" lean-forward="true" selection-start-line="27" selection-start-column="64" selection-end-line="27" selection-end-column="64" />
+        <state relative-caret-position="405">
+          <caret line="27" column="64" selection-start-line="27" selection-start-column="64" selection-end-line="27" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
