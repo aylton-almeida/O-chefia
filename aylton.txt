@@ -1,2 +1,0 @@
-O zip ficou mito grande, todas as partes estao nessa branch do github
-https://github.com/stevreeper/O-chefia/tree/manutencaoService

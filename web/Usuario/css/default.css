@@ -2,3 +2,8 @@
   background-color: #ED6920;
   color: white
 }
+
+.btn-rounded{
+  border-radius: 50%;
+  padding: 25px;
+}

@@ -1,2 +1,0 @@
-O sistema DAO foi implementado no usuario, permitindo
-assim que ele seja cadastrado, logado, alterado, e editado.

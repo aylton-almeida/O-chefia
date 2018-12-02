@@ -9,7 +9,6 @@ $('#document').ready(() => {
         let restauranteArray = response.array;
         restauranteArray.forEach((element) => {
           //Gerar DOM objects
-          console.log(element);
           let divCard = document.createElement("div");
           divCard.className = "card bg-dark text-light m-3";
           let divHeader = document.createElement("div");
@@ -67,16 +66,37 @@ $('#document').ready(() => {
               pIngredientes.innerHTML = element.ingredientes;
               let divRowPrato3 = document.createElement('div');
               divRowPrato3.className = "row";
-              let buttonPrato = document.createElement('btn');
-              buttonPrato.className = "btn btn-orange btn-block";
-              buttonPrato.innerHTML = "Pedir";
+              let counter = 0;
+              let buttonMenos = document.createElement('btn');
+              buttonMenos.className = "btn btn-orange btn-block col-5";
+              buttonMenos.innerHTML = "-";
+              let indicador = document.createElement('p');
+              indicador.id = element.nome;
+              indicador.className = "text-center indicador col-2"
+              indicador.innerHTML = counter;
+              let buttonMais = document.createElement('btn');
+              buttonMais = document.createElement('btn');
+              buttonMais.className = "btn btn-orange btn-block col-5";
+              buttonMais.innerHTML = "+";
+              $(buttonMenos).click(() => {
+                if (counter > 0) {
+                  counter--;
+                  indicador.innerHTML = counter;
+                }
+              })
+              $(buttonMais).click(() => {
+                counter++;
+                indicador.innerHTML = counter;
+              })
               divPrato.appendChild(divRowPrato1);
               divRowPrato1.appendChild(h5Prato);
               divPrato.appendChild(divRowPrato2);
               divRowPrato2.appendChild(pPreco);
               divRowPrato2.appendChild(pIngredientes);
               divPrato.appendChild(divRowPrato3);
-              divRowPrato3.appendChild(buttonPrato);
+              divRowPrato3.appendChild(buttonMenos);
+              divRowPrato3.appendChild(indicador);
+              divRowPrato3.appendChild(buttonMais);
               switch (element.tipo) {
                 case 1:
                   $('#cardOne').show();
@@ -100,13 +120,44 @@ $('#document').ready(() => {
               }
             });
             $('#exampleModalCenter').modal('toggle');
-            $('#exampleModalCenter').on('hide.bs.modal', ()=>{
+            $('#exampleModalCenter').on('hide.bs.modal', () => {
               document.getElementById('cardBodyOne').innerHTML = "";
               $('#cardOne').hide();
               document.getElementById('cardBodyTwo').innerHTML = "";
               $('#cardTwo').hide();
               document.getElementById('cardBodyThree').innerHTML = "";
               $('#cardThree').hide();
+            })
+          })
+          //Fazer pedido
+          $("#btnPedido").click(() => {
+            var pedido = [];
+            let indicadores = $('.indicador');
+            let j = 0;
+            for (var i = 0; i < indicadores.length; i++) {
+              if (parseInt(indicadores[i].innerHTML) > 0) {
+                pedido.push({
+                  prato: indicadores[i].id,
+                  quantidade: indicadores[i].innerHTML,
+                })
+              }
+            }
+            console.log(JSON.parse(sessionStorage.getItem('usuario')).cpf);
+            //Ajax
+            $.ajax({
+              url: 'http://127.0.0.1:7200/fazerPedido',
+              type: "POST",
+              data: ({
+                pedido: JSON.stringify(pedido),
+                usuario: JSON.parse(sessionStorage.getItem('usuario')).email,
+                restaurante: element.cnpj
+              }),
+              success: function(response) {
+                console.log(response);
+              },
+              error: function(event) {
+                console.log(event);
+              }
             })
           })
         })

@@ -26,6 +26,7 @@ public class URLMetodo implements Container {
     private static RestauranteService restaurante = new RestauranteService();
     private static UsuarioService usuario = new UsuarioService();
     private static PratoService prato = new PratoService();
+    private static UsuarioRestauranteService usuarioRestauranteService = new UsuarioRestauranteService();
     private static Usuario user;
     private static UsuarioRestaurante userRestaurante;
     private static Restaurante res;
@@ -88,6 +89,17 @@ public class URLMetodo implements Container {
                                             //Recuperação de pratos
                                             JSONObject obj = prato.recuperarPratos(userRestaurante);
                                             this.enviaResposta(Status.CREATED, response, obj.toString());
+                                        } else {
+                                            if (path.startsWith("/fazerPedido")) {
+                                                //Fazer pedidos
+                                                JSONObject obj = restaurante.fazerPedido(request);
+                                                this.enviaResposta(Status.CREATED, response, obj.toString());
+                                            } else {
+                                                if (path.startsWith("/recuperaPedidos")) {
+                                                    //Recuperar pedidos feitos
+                                                    JSONObject obj = restaurante.recuperaPedidos(userRestaurante.getRestaurante());
+                                                }
+                                            }
                                         }
                                     }
                                 }

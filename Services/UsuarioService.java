@@ -25,7 +25,7 @@ public class UsuarioService {
         return obj;
     }
 
-    //Login cadastro
+    //Login usuario
     public JSONObject loginUsuario(Request request) {
         JSONObject obj = new JSONObject();
         Query query = request.getQuery();

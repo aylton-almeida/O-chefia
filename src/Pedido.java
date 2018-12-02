@@ -12,13 +12,15 @@ public class Pedido implements JsonFormatter {
     private float precoFinal;
     private List<Item> itens;
     private int estado;// estados possíveis: Espera (1), Preparo (2), Finalizado (3), Cancelado (4)
-    private int numMesa;
+    private Usuario usuario;
 
-    public Pedido(List<Item> itens, int numMesa) {
+    public Pedido(List<Item> itens, Usuario usuario) {
         this.setHora(Instant.now());
         this.setItens(itens);
-        this.setNumMesa(numMesa);
+        setUsuario(usuario);
         this.setEstado(1);
+        setPrecoFinal(0);
+        calculaPrecoFinal();
     }
 
     public void avancaStatus() {
@@ -68,14 +70,6 @@ public class Pedido implements JsonFormatter {
         this.estado = estado;
     }
 
-    public int getNumMesa() {
-        return numMesa;
-    }
-
-    public void setNumMesa(int numMesa) {
-        this.numMesa = numMesa;
-    }
-
     public Instant getHora() {
         return hora;
     }
@@ -99,7 +93,20 @@ public class Pedido implements JsonFormatter {
         obj.put("precoFinal", this.precoFinal);
         obj.put("itens", this.itensToJsonArray());
         obj.put("estado", this.estado);
-        obj.put("numMesa", this.numMesa);
+        obj.put("usuario", this.usuario.toJson());
         return obj;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void calculaPrecoFinal(){
+        for (Item i : itens)
+            precoFinal += i.getPreco();
     }
 }

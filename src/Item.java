@@ -6,7 +6,13 @@ public class Item implements JsonFormatter{
 	private Prato prato;
 	private float preco;
 	private float desconto;
-	
+
+	public Item (Prato prato, int quantidade, float desconto){
+		setPrato(prato);
+		setQuantidade(quantidade);
+		setDesconto(desconto);
+		setPreco((float)((prato.getPreco() * quantidade) - desconto));
+	}
 
 	public int getQuantidade() {
 		return quantidade;

@@ -120,7 +120,12 @@ public class Restaurante implements JsonFormatter, ModelObject {
 
     //Pegar pedido em aberto
     public Pedido getPedidoAberto() {
-        return (Pedido) pedidosAbertos.peek();
+        return pedidosAbertos.peek();
+    }
+
+    //Pegar todos os pedidos abertos
+    public List<Pedido> getPedidos() {
+        return new ArrayList<>(pedidosAbertos);
     }
 
     //Fechar primeiro pedido e adiciona-lo ao historico de pedido
@@ -193,7 +198,13 @@ public class Restaurante implements JsonFormatter, ModelObject {
                 .filter((p) -> p.getTipo() == 1)
                 .sorted(Comparator.comparingDouble(Prato::getPreco))
                 .collect(toList());
+    }
 
+    public Prato getPratoPeloNome(String nome) {
+        for (Prato p : cardapio)
+            if (p.getNome().equals(nome))
+                return p;
+        return null;
     }
 
 }

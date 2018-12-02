@@ -37,3 +37,61 @@ if (msg != null && msg.status) {
   }
   sessionStorage.setItem('mensagem', null);
 }
+
+//Login Usuario
+$('#btnLogin').click(() => {
+  if ($("#formLogin")[0].checkValidity()) {
+    //AJAX
+    $.ajax({
+      url: 'http://127.0.0.1:7200/loginRestauranteUsuario',
+      type: "POST",
+      data: ({
+        email: $('#emailInput').val(),
+        senha: $('#senhaInput').val()
+      }),
+      success: function(response) {
+        if (response.status == 1) {
+          let usuario = {
+            status: true,
+            nome: response.usuario.nome,
+            email: response.usuario.email,
+            senha: response.usuario.senha,
+            cpf: response.usuario.cpf,
+            telefone: response.usuario.telefone
+          };
+          let mensagem = {
+            status: true,
+            type: "success",
+            message: "Login efetuado com sucesso"
+          };
+          sessionStorage.setItem('usuario', JSON.stringify(usuario));
+          sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
+          window.location.reload();
+        } else {
+          let mensagem = {
+            status: true,
+            type: "error",
+            message: response.message
+          };
+          sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
+        }
+      },
+      error: function(event) {
+        let mensagem = {
+          status: true,
+          type: "error",
+          message: "Erro ao fazer login"
+        };
+        sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
+        console.log(event);
+      }
+    })
+  } else {
+    let mensagem = {
+      status: true,
+      type: "error",
+      message: "Peencha os campos corretamente"
+    };
+    sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
+  }
+})
