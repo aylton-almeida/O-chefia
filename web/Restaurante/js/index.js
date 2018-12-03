@@ -44,25 +44,7 @@ function atualizarPedidos() {
           divRow2.className = "row";
           let p = document.createElement('p');
           p.className = "card-title col-3";
-          p.innerHTML = "Atualizar status";
-          // let divButtons = document.createElement('div');
-          // divButtons.className = "offset-4 col-5";
-          // let btnRecebido = document.createElement('btn');
-          // btnRecebido.id = "btnRecebido";
-          // btnRecebido.className = "btn btn-outline-primary mx-1";
-          // btnRecebido.innerHTML = "Recebido";
-          // let btnPreparo = document.createElement('btn');
-          // btnPreparo.id = "btnPreparo";
-          // btnPreparo.className = "btn btn-outline-warning mx-1";
-          // btnPreparo.innerHTML = "Em preparo";
-          // let btnSucesso = document.createElement('btn');
-          // btnSucesso.id = "btnSucesso";
-          // btnSucesso.className = "btn btn-outline-success mx-1";
-          // btnSucesso.innerHTML = "Pronto";
-          // let btnCancelado = document.createElement('btn');
-          // btnCancelado.id = "btnCancelado";
-          // btnCancelado.className = "btn btn-outline-danger mx-1";
-          // btnCancelado.innerHTML = "Cancelado";
+          p.innerHTML = "Total do pedido: " + element.precoFinal;
           let divFooter = document.createElement('div');
           divFooter.className = "card-footer text-muted";
           let pHora = document.createElement('p');
@@ -77,118 +59,11 @@ function atualizarPedidos() {
           divBody.appendChild(ul);
           divBody.appendChild(divRow2);
           divRow2.appendChild(p);
-          divRow2.appendChild(divButtons);
-          divButtons.appendChild(btnRecebido);
-          divButtons.appendChild(btnPreparo);
-          divButtons.appendChild(btnSucesso);
-          divButtons.appendChild(btnCancelado);
           divCard.appendChild(divFooter);
           divFooter.appendChild(pHora);
-          //SIstema de desbilitar butoes e seleciona-los
-          $('#btnRecebido').click(() => {
-            console.log(element.precoFinal);
-            $.ajax({
-              url: 'http://127.0.0.1:7200/alteraStatus',
-              type: "POST",
-              data: ({
-                pedido: element.precoFinal,
-                estado: 1
-              }),
-              success: function(e) {
-                $('#btnRecebido').attr('class', 'btn btn-primary mx-1');
-                $('#btnRecebido').prop("disabled", true);
-                $('#btnPreparo').attr('class', 'btn btn-outline-warning mx-1');
-                $('#btnPreparo').prop('disabled', false);
-                $('#btnSucesso').attr('class', 'btn btn-outline-success mx-1');
-                $('#btnSucesso').prop('disabled', false);
-                $('#btnCancelado').attr('class', 'btn btn-outline-danger mx-1');
-                $('#btnCancelado').prop('disabled', false);
-                console.log(e);
-              },
-              error: function(e) {
-                console.log(e);
-              }
-            })
-          })
-          $('#btnPreparo').click(() => {
-            $.ajax({
-              url: 'http://127.0.0.1:7200/alteraStatus',
-              type: "POST",
-              data: ({
-                pedido: element.precoFinal,
-                estado: 2
-              }),
-              success: function() {
-                $('#btnPreparo').attr('class', 'btn btn-warning mx-1');
-                $('#btnPreparo').prop("disabled", true);
-                $('#btnRecebido').attr('class', 'btn btn-outline-primary mx-1');
-                $('#btnRecebido').prop('disabled', false);
-                $('#btnSucesso').attr('class', 'btn btn-outline-success mx-1');
-                $('#btnSucesso').prop('disabled', false);
-                $('#btnCancelado').attr('class', 'btn btn-outline-danger mx-1');
-                $('#btnCancelado').prop('disabled', false);
-              },
-              error: function(e) {
-                console.log(e);
-              }
-            })
-          })
-          $('#btnSucesso').click(() => {
-            $.ajax({
-              url: 'http://127.0.0.1:7200/alteraStatus',
-              type: "POST",
-              data: ({
-                pedido: element.precoFinal,
-                estado: 3
-              }),
-              success: function() {
-                $('#btnSucesso').attr('class', 'btn btn-success mx-1');
-                $('#btnSucesso').prop("disabled", true);
-                $('#btnRecebido').attr('class', 'btn btn-outline-primary mx-1');
-                $('#btnRecebido').prop('disabled', false);
-                $('#btnPreparo').attr('class', 'btn btn-outline-warning mx-1');
-                $('#btnPreparo').prop('disabled', false);
-                $('#btnCancelado').attr('class', 'btn btn-outline-danger mx-1');
-                $('#btnCancelado').prop('disabled', false);
-              },
-              error: function(e) {
-                console.log(e);
-              }
-            })
-          })
-          $('#btnCancelado').click(() => {
-            $.ajax({
-              url: 'http://127.0.0.1:7200/alteraStatus',
-              type: "POST",
-              data: ({
-                pedido: element.precoFinal,
-                estado: 4
-              }),
-              success: function() {
-                $('#btnCancelado').attr('class', 'btn btn-danger mx-1');
-                $('#btnCancelado').prop("disabled", true);
-                $('#btnRecebido').attr('class', 'btn btn-outline-primary mx-1');
-                $('#btnRecebido').prop('disabled', false);
-                $('#btnPreparo').attr('class', 'btn btn-outline-warning mx-1');
-                $('#btnPreparo').prop('disabled', false);
-                $('#btnSucesso').attr('class', 'btn btn-outline-success mx-1');
-                $('#btnSucesso').prop('disabled', false);
-              },
-              error: function(e) {
-                console.log(e);
-              }
-            })
-          })
           //Button que fecha pedido
           $('#closeBtn').click(() => {
-            if ($('#btnCancelado').prop('disabled') == true || $('#btnSucesso').prop('disabled') == true) {
-              $('#closeBtn').closest('.card').remove();
-            } else {
-              msgError('O pedido deve ser cancelado ou concluido antes de poder ser excluido', 'danger');
-              setTimeout(function() {
-                $('#msg').empty()
-              }, 3000);
-            }
+            $('#closeBtn').closest('.card').remove();
           })
         })
       } else {
