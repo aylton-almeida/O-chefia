@@ -1,9 +1,14 @@
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
 
+import java.util.Queue;
+import java.util.stream.Collectors;
+
 public class UsuarioService {
     private Usuarios usuarios = new Usuarios();
+    private Restaurantes restauranteDAO = new Restaurantes();
 
     //Cadastro de usuario
     public JSONObject cadastroUsuario(Request request) {
@@ -94,6 +99,29 @@ public class UsuarioService {
             obj.put("stackTrace", e.getStackTrace());
             obj.put("message", e.getMessage());
             obj.put("usuario", new Usuario().toJson());
+        }
+        return obj;
+    }
+
+    //Acompanhar pedido
+    public JSONObject acompanhaPedido(Request request, Usuario user) {
+        JSONObject obj = new JSONObject();
+        Query query = request.getQuery();
+        try {
+            Restaurante restaurante = (Restaurante) restauranteDAO.getObject(query.get("restaurante"));
+            Queue<Pedido> queue = restaurante.getPedidosAbertos();
+            JSONArray array = new JSONArray(queue.stream()
+                    .filter((p) -> p.getUsuario().equals(user))
+                    .toArray());
+            obj.put("status", 1);
+            obj.put("message", "Foram recuperados " + array.length() + " pedidos");
+            obj.put("array", array);
+        } catch (Exception e) {
+            obj.put("status", 0);
+            obj.put("type", e.getClass());
+            obj.put("stackTrace", e.getStackTrace());
+            obj.put("message", e.getMessage());
+            obj.put("array", 0);
         }
         return obj;
     }

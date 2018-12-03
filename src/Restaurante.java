@@ -26,8 +26,8 @@ public class Restaurante implements JsonFormatter, ModelObject {
         setCnpj(cnpj);
         setEndereco(endereco);
         setNumMesas(numMesas);
-        setCardapio(new ArrayList());
-        setPedidosAbertos(new ArrayDeque());
+        setCardapio(new ArrayList<>());
+        setPedidosAbertos(new ArrayDeque<Pedido>());
         setHistoricoDePedidos(new ArrayList<>());
         setTelefone(telefone);
     }
@@ -163,11 +163,7 @@ public class Restaurante implements JsonFormatter, ModelObject {
     }
 
     public JSONArray pedidosAbertoToJsonArray() {
-        JSONArray array = new JSONArray();
-        for (int i = 0; i < pedidosAbertos.size(); i++) {
-            array.put(pedidosAbertos.peek().toJson());
-            pedidosAbertos.add(pedidosAbertos.remove());
-        }
+        JSONArray array = new JSONArray(pedidosAbertos);
         return array;
     }
 
@@ -205,6 +201,10 @@ public class Restaurante implements JsonFormatter, ModelObject {
             if (p.getNome().equals(nome))
                 return p;
         return null;
+    }
+
+    public Queue<Pedido> getPedidosAbertos() {
+        return pedidosAbertos;
     }
 
 }

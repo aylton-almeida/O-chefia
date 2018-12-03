@@ -98,7 +98,20 @@ public class URLMetodo implements Container {
                                                 if (path.startsWith("/recuperaPedidos")) {
                                                     //Recuperar pedidos feitos
                                                     JSONObject obj = restaurante.recuperaPedidos(userRestaurante.getRestaurante());
-                                                }
+                                                    this.enviaResposta(Status.CREATED, response, obj.toString());
+                                                } //else {
+//                                                    if (path.startsWith("/acompanhaPedido")) {
+//                                                        //Acompanhar status do pedido pelo cliente
+//                                                        JSONObject obj = usuario.acompanhaPedido(request, user);
+//                                                        this.enviaResposta(Status.CREATED, response, obj.toString());
+//                                                    }else{
+//                                                        if (path.startsWith("/alteraStatus")){
+//                                                            //Alterar status do pedido
+//                                                            JSONObject obj = restaurante.alteraStatus(request);
+//                                                            this.enviaResposta(Status.CREATED, response, obj.toString());
+//                                                        }
+//                                                    }
+//                                                }
                                             }
                                         }
                                     }

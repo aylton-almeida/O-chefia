@@ -86,9 +86,30 @@ public class RestauranteService {
     public JSONObject recuperaPedidos(Restaurante restaurante) {
         JSONObject obj = new JSONObject();
         try {
-            JSONArray array = restaurante.pedidosAbertoToJsonArray();
+            JSONArray array = ((Restaurante)restaurantesDAO.getObject(restaurante.getCnpj())).pedidosAbertoToJsonArray();
             obj.put("status", 1);
             obj.put("array", array);
+        } catch (Exception e) {
+            obj.put("status", 0);
+            obj.put("type", e.getClass());
+            obj.put("stackTrace", e.getStackTrace());
+            obj.put("message", e.getMessage());
+        }
+        return obj;
+    }
+
+    //Alterar status do pedido
+    public JSONObject alteraStatus (Request request) {
+        JSONObject obj = new JSONObject();
+        try {
+            Query query = request.getQuery();
+            Pedido pedido = mapper.readValue(query.get("prato"), Pedido.class);
+            pedido.alteraStatus(query.getInteger("estado"));
+            Restaurante restaurante = (Restaurante) restaurantesDAO.getObject(query.get("restaurante"));
+            //restaurante.updatePedido(pedido);
+            restaurantesDAO.updateObject(restaurante);
+            obj.put("status", 1);
+            obj.put("message", "Estado alterado com sucesso");
         } catch (Exception e) {
             obj.put("status", 0);
             obj.put("type", e.getClass());

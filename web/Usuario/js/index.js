@@ -129,41 +129,53 @@ $('#document').ready(() => {
               $('#cardThree').hide();
             })
           })
-          //Fazer pedido
-          $("#btnPedido").click(() => {
-            var pedido = [];
-            let indicadores = $('.indicador');
-            let j = 0;
-            for (var i = 0; i < indicadores.length; i++) {
-              if (parseInt(indicadores[i].innerHTML) > 0) {
-                pedido.push({
-                  prato: indicadores[i].id,
-                  quantidade: indicadores[i].innerHTML,
-                })
+          if (JSON.parse(sessionStorage.getItem('usuario')) != null) {
+            //Fazer pedido
+            $("#btnPedido").click(() => {
+              var pedido = [];
+              let indicadores = $('.indicador');
+              let j = 0;
+              for (var i = 0; i < indicadores.length; i++) {
+                if (parseInt(indicadores[i].innerHTML) > 0) {
+                  pedido.push({
+                    prato: indicadores[i].id,
+                    quantidade: indicadores[i].innerHTML,
+                  })
+                }
               }
-            }
-            console.log(JSON.parse(sessionStorage.getItem('usuario')).cpf);
-            //Ajax
-            $.ajax({
-              url: 'http://127.0.0.1:7200/fazerPedido',
-              type: "POST",
-              data: ({
-                pedido: JSON.stringify(pedido),
-                usuario: JSON.parse(sessionStorage.getItem('usuario')).email,
-                restaurante: element.cnpj
-              }),
-              success: function(response) {
-                console.log(response);
-              },
-              error: function(event) {
-                console.log(event);
-              }
+              //Ajax
+              $.ajax({
+                url: 'http://127.0.0.1:7200/fazerPedido',
+                type: "POST",
+                data: ({
+                  pedido: JSON.stringify(pedido),
+                  usuario: JSON.parse(sessionStorage.getItem('usuario')).email,
+                  restaurante: element.cnpj
+                }),
+                success: function(response) {
+                  if (response.status == 1) {
+                    $('#exampleModalCenter').modal('toggle');
+                    let mensagem = {
+                      status: true,
+                      type: "success",
+                      message: response.message
+                    };
+                    sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
+                    window.location.href = "./html/statusPedido.html";
+                  }
+                },
+                error: function(event) {
+                  msgError(event.message);
+                  console.log(event);
+                }
+              })
             })
-          })
+          } else {
+            msgError("Você precisa ter feito login para fazer um pedido");
+          }
         })
       } else {
         console.log(response.status);
-        console.log(response);
         console.log(response.stackTrace);
         console.log(response.message);
       }

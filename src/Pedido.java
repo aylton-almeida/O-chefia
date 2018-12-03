@@ -23,6 +23,8 @@ public class Pedido implements JsonFormatter {
         calculaPrecoFinal();
     }
 
+    public Pedido(){}
+
     public void avancaStatus() {
         switch (this.getEstado()) {
 
@@ -81,7 +83,7 @@ public class Pedido implements JsonFormatter {
     public JSONArray itensToJsonArray() {
         JSONArray array = new JSONArray();
         for (int i = 0; i < itens.size(); i++) {
-            array.put(((Item) itens.get(i)).toJson());
+            array.put(itens.get(i).toJson());
         }
         return array;
     }
@@ -108,5 +110,9 @@ public class Pedido implements JsonFormatter {
     public void calculaPrecoFinal(){
         for (Item i : itens)
             precoFinal += i.getPreco();
+    }
+
+    public void alteraStatus(int estado){
+        this.estado = estado;
     }
 }
