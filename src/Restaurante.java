@@ -1,7 +1,9 @@
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
@@ -203,8 +205,28 @@ public class Restaurante implements JsonFormatter, ModelObject {
         return null;
     }
 
+    public Pedido getPedidoPeloPreco(float preco) {
+        for (Pedido p : pedidosAbertos)
+            if (p.getPrecoFinal() == preco)
+                return p;
+        return null;
+    }
+
     public Queue<Pedido> getPedidosAbertos() {
         return pedidosAbertos;
     }
 
+    public void updatePedido(Pedido pedido){
+        for (int i = 0; i < pedidosAbertos.size(); i++){
+            if (pedido.getHora().equals(pedidosAbertos.peek())){
+                pedidosAbertos.remove();
+                pedidosAbertos.add(pedido);
+                this.pedidosAbertos = pedidosAbertos.stream()
+                        .sorted(Comparator.comparing(Pedido::getPrecoFinal))
+                        .collect(Collectors.toCollection(ArrayDeque::new));
+            }else{
+                pedidosAbertos.add(pedidosAbertos.remove());
+            }
+        }
+    }
 }

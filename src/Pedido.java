@@ -11,7 +11,7 @@ public class Pedido implements JsonFormatter {
     private Instant hora;
     private float precoFinal;
     private List<Item> itens;
-    private int estado;// estados possíveis: Espera (1), Preparo (2), Finalizado (3), Cancelado (4)
+    private int estado;// estados possíveis: Recebido (1), Preparo (2), Finalizado (3), Cancelado (4)
     private Usuario usuario;
 
     public Pedido(List<Item> itens, Usuario usuario) {

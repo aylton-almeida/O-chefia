@@ -99,14 +99,13 @@ public class RestauranteService {
     }
 
     //Alterar status do pedido
-    public JSONObject alteraStatus (Request request) {
+    public JSONObject alteraStatus (Request request, Restaurante restaurante) {
         JSONObject obj = new JSONObject();
         try {
             Query query = request.getQuery();
-            Pedido pedido = mapper.readValue(query.get("prato"), Pedido.class);
+            Pedido pedido = restaurante.getPedidoPeloPreco(query.getFloat("pedido"));
             pedido.alteraStatus(query.getInteger("estado"));
-            Restaurante restaurante = (Restaurante) restaurantesDAO.getObject(query.get("restaurante"));
-            //restaurante.updatePedido(pedido);
+            restaurante.updatePedido(pedido);
             restaurantesDAO.updateObject(restaurante);
             obj.put("status", 1);
             obj.put("message", "Estado alterado com sucesso");

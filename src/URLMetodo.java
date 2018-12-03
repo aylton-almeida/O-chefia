@@ -107,7 +107,7 @@ public class URLMetodo implements Container {
 //                                                    }else{
 //                                                        if (path.startsWith("/alteraStatus")){
 //                                                            //Alterar status do pedido
-//                                                            JSONObject obj = restaurante.alteraStatus(request);
+//                                                            JSONObject obj = restaurante.alteraStatus(request, userRestaurante.getRestaurante());
 //                                                            this.enviaResposta(Status.CREATED, response, obj.toString());
 //                                                        }
 //                                                    }

@@ -132,6 +132,7 @@ $('#document').ready(() => {
           if (JSON.parse(sessionStorage.getItem('usuario')) != null) {
             //Fazer pedido
             $("#btnPedido").click(() => {
+              let preco = 0;
               var pedido = [];
               let indicadores = $('.indicador');
               let j = 0;
@@ -141,6 +142,8 @@ $('#document').ready(() => {
                     prato: indicadores[i].id,
                     quantidade: indicadores[i].innerHTML,
                   })
+                  preco += indicadores[i].innerHTML * element.preco;
+                  console.log(preco);
                 }
               }
               //Ajax
@@ -155,13 +158,14 @@ $('#document').ready(() => {
                 success: function(response) {
                   if (response.status == 1) {
                     $('#exampleModalCenter').modal('toggle');
-                    let mensagem = {
-                      status: true,
-                      type: "success",
-                      message: response.message
-                    };
-                    sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
-                    window.location.href = "./html/statusPedido.html";
+                    msgSuccess(response.message);
+                    // let mensagem = {
+                    //   status: true,
+                    //   type: "success",
+                    //   message: response.message
+                    // };
+                    // sessionStorage.setItem('mensagem', JSON.stringify(mensagem));
+                    // window.location.href = "./html/statusPedido.html";
                   }
                 },
                 error: function(event) {
